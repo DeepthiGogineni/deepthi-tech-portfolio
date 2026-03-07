@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI &amp; ML Timeline | Deepthi Pinninti Portfolio</title>
+  <meta name="description" content="An interactive timeline of key milestones in Artificial Intelligence and Machine Learning history.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    /* ===== Enhanced Hero ===== */
+    .artifact-page-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 10rem 0 5rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+      color: #f1f5f9;
+    }
+
+    .artifact-page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 350px at 80% 30%, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .artifact-page-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .artifact-page-hero h1 {
+      color: #f1f5f9;
+      font-size: 3.25rem;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .artifact-page-hero .breadcrumb a {
+      color: #94a3b8;
+    }
+
+    .artifact-page-hero .breadcrumb a:hover {
+      color: #e2e8f0;
+    }
+
+    .artifact-page-hero .breadcrumb span {
+      color: #64748b;
+    }
+
+    .artifact-page-hero .breadcrumb .breadcrumb-current {
+      color: #93c5fd;
+    }
+
+    .artifact-page-hero .hero-tag {
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid rgba(37, 99, 235, 0.35);
+      color: #93c5fd;
+    }
+
+    .artifact-page-hero .artifact-hero-desc {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .artifact-page-hero .meta-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+    }
+
+    /* ===== Particle Background ===== */
+    .particle-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .particle-bg .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: particleRise linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes particleRise {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-20vh) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* ===== Hero Grid Pattern ===== */
+    .hero-grid-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+    }
+
+    /* ===== Hero Stats Bar ===== */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-stat {
+      text-align: left;
+    }
+
+    .hero-stat .stat-number {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-stat .stat-label {
+      font-size: 0.8rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* ===== Glass Card ===== */
+    .glass-card {
+      background: rgba(248, 250, 252, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(248, 250, 252, 0.85);
+      border-color: rgba(37, 99, 235, 0.25);
+      box-shadow:
+        0 8px 32px rgba(37, 99, 235, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transform: translateY(-4px);
+    }
+
+    /* ===== Tilt Card (3D hover) ===== */
+    .tilt-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .tilt-card:hover {
+      box-shadow:
+        0 20px 40px rgba(37, 99, 235, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Scroll reveal handled by main CSS + main.js */
+
+    /* ===== Enhanced Timeline ===== */
+    .timeline-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .timeline::before {
+      background: linear-gradient(180deg, var(--primary), var(--accent), var(--primary));
+      width: 3px;
+    }
+
+    .timeline-dot {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .timeline-item:hover .timeline-dot {
+      transform: scale(1.5);
+      box-shadow: 0 0 0 4px var(--primary), 0 0 16px rgba(37, 99, 235, 0.3);
+    }
+
+    .era-label span {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+      padding: 0.5rem 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .timeline-card.tilt-card {
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .timeline-card.tilt-card:hover {
+      border-color: rgba(37, 99, 235, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .timeline-year {
+      background: var(--gradient);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+    }
+
+    /* ===== Enhanced Section Label ===== */
+    .timeline-section .section-label {
+      text-align: center;
+      display: block;
+    }
+
+    /* ===== Enhanced References ===== */
+    .references-section .info-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .references-section .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient);
+    }
+
+    .references-section .info-card ul li {
+      padding: 0.4rem 0;
+      transition: all 0.2s ease;
+    }
+
+    .references-section .info-card ul li:hover {
+      padding-left: 0.5rem;
+      color: var(--text);
+    }
+
+    /* ===== Info Card Enhancements ===== */
+    .info-card.glass-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card.glass-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .info-card.glass-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .info-card.glass-card h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card.glass-card h4::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1em;
+      background: var(--gradient);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Enhanced Artifact Info Section ===== */
+    .artifact-content {
+      position: relative;
+    }
+
+    .artifact-content::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== Enhanced Footer ===== */
+    .footer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gradient);
+    }
+
+    /* ===== Reduced Motion Preference ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .particle-bg .particle {
+        animation: none;
+        display: none;
+      }
+
+      .tilt-card:hover,
+      .glass-card:hover,
+      .timeline-card.tilt-card:hover {
+        transform: none;
+      }
+    }
+
+    /* ===== Responsive Enhancements ===== */
+    @media (max-width: 768px) {
+      .artifact-page-hero {
+        padding: 8rem 0 3rem;
+      }
+
+      .artifact-page-hero h1 {
+        font-size: 2.25rem;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-stat .stat-number {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container">
+      <a href="../../index.html" class="nav-brand"><span>DP</span> Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../index.html#artifacts">Artifacts</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Artifact Hero -->
+    <section class="artifact-page-hero">
+      <div class="hero-grid-pattern" aria-hidden="true"></div>
+      <div class="particle-bg" aria-hidden="true"></div>
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../../index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="../../index.html#artifacts">Artifacts</a>
+          <span aria-hidden="true">/</span>
+          <span class="breadcrumb-current" aria-current="page">AI &amp; ML Timeline</span>
+        </nav>
+        <div class="hero-tag">Artifact 1 &bull; Workshop 1</div>
+        <h1>The Evolution of <span class="gradient-text">AI &amp; Machine Learning</span></h1>
+        <p class="artifact-hero-desc">A comprehensive timeline tracing the pivotal moments, breakthroughs, and paradigm shifts that have shaped artificial intelligence and machine learning from theoretical beginnings to today's transformative applications.</p>
+        <div class="artifact-meta">
+          <span class="meta-tag">March 2026</span>
+          <span class="meta-tag">IWU - AI &amp; ML Course</span>
+          <span class="meta-tag">Research &amp; Synthesis</span>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-number">19</span>
+            <span class="stat-label">Key Events</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">76</span>
+            <span class="stat-label">Years Covered</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">4</span>
+            <span class="stat-label">Distinct Eras</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">7</span>
+            <span class="stat-label">References</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artifact Information -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="100">
+            <h4>Objective</h4>
+            <p>To research, synthesize, and present the major milestones in AI and ML history, demonstrating an understanding of how foundational concepts evolved into the technologies shaping our world today.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
+            <h4>Process</h4>
+            <p>Conducted research on AI/ML history from academic sources and industry publications. Identified key milestones across eras, synthesized findings into a cohesive narrative, and designed an interactive timeline for web presentation.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Value Proposition</h4>
+            <p>This artifact demonstrates my ability to research complex technical topics, synthesize information from multiple sources, and communicate findings in an accessible, visually engaging format. It serves as a resource for anyone wanting to understand the AI/ML landscape.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="400">
+            <h4>Unique Value</h4>
+            <p>Understanding the history of AI and ML is critical for any professional in the field. This timeline not only shows <strong>what</strong> happened, but <strong>why</strong> each breakthrough mattered and how it built upon previous work. As an AI/ML practitioner, this historical perspective informs better decision-making about which technologies to apply and how to anticipate future developments.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="500">
+            <h4>Relevance</h4>
+            <p>This resource is valuable to fellow students, educators, and professionals seeking a concise yet comprehensive overview of the field's evolution. By tracing the arc from Turing's foundational question to today's generative AI revolution, the timeline provides essential context for understanding where AI is heading and how to position oneself in this rapidly changing landscape.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- The Timeline -->
+    <section class="timeline-section">
+      <div class="container">
+        <div class="section-label">The Journey of AI</div>
+        <h2>AI &amp; Machine Learning Timeline</h2>
+
+        <div class="timeline">
+          <div class="timeline-progress"></div>
+
+          <!-- Era: Foundations -->
+          <div class="era-label">
+            <span>The Foundations (1950s&ndash;1960s)</span>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">1950</span>
+              <h4>The Turing Test</h4>
+              <p>Alan Turing published "Computing Machinery and Intelligence," proposing the Imitation Game as a measure of machine intelligence. This landmark paper asked the foundational question: "Can machines think?"</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">1956</span>
+              <h4>Dartmouth Conference</h4>
+              <p>John McCarthy, Marvin Minsky, and colleagues coined the term "Artificial Intelligence" at the Dartmouth Summer Research Project, officially establishing AI as an academic discipline.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">1958</span>
+              <h4>The Perceptron</h4>
+              <p>Frank Rosenblatt developed the Perceptron, an early neural network model capable of binary classification. It was one of the first algorithms that could learn from data.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">1966</span>
+              <h4>ELIZA Chatbot</h4>
+              <p>Joseph Weizenbaum created ELIZA at MIT, one of the first conversational AI programs. It simulated conversation by pattern matching, foreshadowing modern chatbots.</p>
+            </div>
+          </div>
+
+          <!-- Era: AI Winters and Revivals -->
+          <div class="era-label">
+            <span>Challenges &amp; Revivals (1970s&ndash;1990s)</span>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">1974&ndash;80</span>
+              <h4>First AI Winter</h4>
+              <p>Reduced funding and unmet expectations led to the first "AI Winter." The Lighthill Report (1973) criticized AI's lack of progress, causing governments to cut research funding significantly.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">1980</span>
+              <h4>Expert Systems Boom</h4>
+              <p>Expert systems like XCON (R1) demonstrated commercial viability, reigniting AI investment. These rule-based systems encoded human expertise for specialized decision-making in business and medicine.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">1986</span>
+              <h4>Backpropagation</h4>
+              <p>Rumelhart, Hinton, and Williams popularized the backpropagation algorithm, enabling efficient training of multi-layer neural networks. This breakthrough revived interest in connectionism and deep learning.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">1997</span>
+              <h4>Deep Blue Defeats Kasparov</h4>
+              <p>IBM's Deep Blue became the first computer to defeat a reigning world chess champion, Garry Kasparov, in a six-game match. This marked a milestone in AI's ability to master complex strategic tasks.</p>
+            </div>
+          </div>
+
+          <!-- Era: Modern ML -->
+          <div class="era-label">
+            <span>The Machine Learning Revolution (2000s&ndash;2010s)</span>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2006</span>
+              <h4>Deep Learning Renaissance</h4>
+              <p>Geoffrey Hinton's work on deep belief networks showed that deep neural networks could be effectively trained layer by layer. This sparked the deep learning renaissance that continues today.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2011</span>
+              <h4>Watson Wins Jeopardy!</h4>
+              <p>IBM Watson defeated champions Ken Jennings and Brad Rutter on Jeopardy!, demonstrating AI's ability to understand natural language, process unstructured information, and reason under uncertainty.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2012</span>
+              <h4>AlexNet &amp; ImageNet</h4>
+              <p>Alex Krizhevsky's deep CNN won the ImageNet competition by a massive margin, proving deep learning's superiority for image recognition. This catalyzed the widespread adoption of deep learning across the industry.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2014</span>
+              <h4>Generative Adversarial Networks</h4>
+              <p>Ian Goodfellow introduced GANs, where two neural networks compete to generate increasingly realistic synthetic data. GANs opened new frontiers in image generation, style transfer, and creative AI applications.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2016</span>
+              <h4>AlphaGo Defeats Lee Sedol</h4>
+              <p>Google DeepMind's AlphaGo defeated world Go champion Lee Sedol 4&ndash;1. Go's complexity (more possible positions than atoms in the universe) made this a landmark achievement for reinforcement learning.</p>
+            </div>
+          </div>
+
+          <!-- Era: LLMs and Today -->
+          <div class="era-label">
+            <span>The Generative AI Era (2017&ndash;Present)</span>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2017</span>
+              <h4>Transformers: "Attention Is All You Need"</h4>
+              <p>Google researchers introduced the Transformer architecture, replacing recurrent models with self-attention mechanisms. This became the foundation for virtually all modern large language models.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2018</span>
+              <h4>BERT &amp; GPT</h4>
+              <p>Google released BERT and OpenAI released GPT, demonstrating that large-scale pre-trained language models could achieve state-of-the-art performance across a wide range of NLP tasks through transfer learning.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2020</span>
+              <h4>GPT-3: Scale Changes Everything</h4>
+              <p>OpenAI's GPT-3 with 175 billion parameters showed emergent abilities: writing code, composing essays, translating languages, and performing tasks it wasn't explicitly trained for, demonstrating the power of scale.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2022</span>
+              <h4>ChatGPT &amp; Generative AI Explosion</h4>
+              <p>ChatGPT reached 100 million users in two months, making AI accessible to the general public. Alongside DALL-E 2 and Stable Diffusion, this launched the generative AI revolution across industries.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2023&ndash;24</span>
+              <h4>Multimodal AI &amp; Agents</h4>
+              <p>GPT-4, Gemini, and Claude introduced multimodal capabilities (text, image, code, audio). AI agents began performing complex multi-step tasks autonomously, signaling a new era of AI integration in workflows.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card tilt-card">
+              <span class="timeline-year">2025&ndash;26</span>
+              <h4>AI Everywhere: The Current Landscape</h4>
+              <p>AI is now embedded across healthcare, education, finance, creative industries, and scientific research. Focus has shifted to responsible AI governance, efficiency, and domain-specific applications that deliver measurable value.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- References -->
+    <section class="artifact-content references-section reveal">
+      <div class="container">
+        <div class="info-card glass-card full-width references-card">
+          <h4>References</h4>
+          <ul>
+            <li>Turing, A. M. (1950). Computing Machinery and Intelligence. <em>Mind</em>, 59(236), 433&ndash;460.</li>
+            <li>McCarthy, J., et al. (1956). A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence.</li>
+            <li>Rumelhart, D. E., Hinton, G. E., &amp; Williams, R. J. (1986). Learning representations by back-propagating errors. <em>Nature</em>, 323, 533&ndash;536.</li>
+            <li>Vaswani, A., et al. (2017). Attention Is All You Need. <em>Advances in Neural Information Processing Systems</em>, 30.</li>
+            <li>Brown, T., et al. (2020). Language Models are Few-Shot Learners. <em>NeurIPS 2020</em>.</li>
+            <li>Goodfellow, I., et al. (2014). Generative Adversarial Networks. <em>arXiv:1406.2661</em>.</li>
+            <li>Russell, S. &amp; Norvig, P. (2021). <em>Artificial Intelligence: A Modern Approach</em> (4th ed.). Pearson.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Deepthi Pinninti &bull; AI &amp; ML Portfolio &copy; 2026</p>
+      <p class="footer-sub"><a href="../../index.html">&#8592; Back to Portfolio</a> | Built with GitHub Pages | Indiana Wesleyan University</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Particle Generator ===== */
+    (function initParticles() {
+      var bg = document.querySelector('.particle-bg');
+      if (!bg) return;
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      var colors = [
+        'rgba(37, 99, 235, 0.25)',
+        'rgba(124, 58, 237, 0.2)',
+        'rgba(37, 99, 235, 0.15)',
+        'rgba(124, 58, 237, 0.12)',
+        'rgba(59, 130, 246, 0.18)'
+      ];
+
+      for (var i = 0; i < 30; i++) {
+        var particle = document.createElement('div');
+        particle.classList.add('particle');
+        var size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+        particle.style.animationDelay = (Math.random() * 10) + 's';
+        bg.appendChild(particle);
+      }
+    })();
+
+    /* Scroll reveal and tilt handled by main.js */
+  </script>
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>
