@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ML vs. Deep Learning | Deepthi Pinninti Portfolio</title>
+  <meta name="description" content="A comparative analysis of Machine Learning and Deep Learning through real-world case studies: Email Spam Detection and Facial Recognition.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    /* ===== Enhanced Hero ===== */
+    .artifact-page-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 10rem 0 5rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+      color: #f1f5f9;
+    }
+
+    .artifact-page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 350px at 80% 30%, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .artifact-page-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .artifact-page-hero h1 {
+      color: #f1f5f9;
+      font-size: 3.25rem;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .artifact-page-hero .breadcrumb a {
+      color: #94a3b8;
+    }
+
+    .artifact-page-hero .breadcrumb a:hover {
+      color: #e2e8f0;
+    }
+
+    .artifact-page-hero .breadcrumb span {
+      color: #64748b;
+    }
+
+    .artifact-page-hero .breadcrumb .breadcrumb-current {
+      color: #93c5fd;
+    }
+
+    .artifact-page-hero .hero-tag {
+      background: rgba(124, 58, 237, 0.2);
+      border: 1px solid rgba(124, 58, 237, 0.35);
+      color: #c4b5fd;
+    }
+
+    .artifact-page-hero .artifact-hero-desc {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .artifact-page-hero .meta-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+    }
+
+    /* ===== Particle Background ===== */
+    .particle-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .particle-bg .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: particleRise linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes particleRise {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-20vh) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* ===== Hero Grid Pattern ===== */
+    .hero-grid-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(124, 58, 237, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 58, 237, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+    }
+
+    /* ===== Hero Stats Bar ===== */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-stat {
+      text-align: left;
+    }
+
+    .hero-stat .stat-number {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-stat .stat-label {
+      font-size: 0.8rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* ===== Glass Card ===== */
+    .glass-card {
+      background: rgba(248, 250, 252, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(248, 250, 252, 0.85);
+      border-color: rgba(37, 99, 235, 0.25);
+      box-shadow:
+        0 8px 32px rgba(37, 99, 235, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transform: translateY(-4px);
+    }
+
+    /* ===== Tilt Card ===== */
+    .tilt-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .tilt-card:hover {
+      box-shadow:
+        0 20px 40px rgba(37, 99, 235, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ===== Info Card Enhancements ===== */
+    .info-card.glass-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card.glass-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .info-card.glass-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .info-card.glass-card h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card.glass-card h4::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1em;
+      background: var(--gradient);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Enhanced Artifact Content ===== */
+    .artifact-content {
+      position: relative;
+    }
+
+    .artifact-content::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== Comparison Section ===== */
+    .comparison-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .comparison-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Intro cards: ML vs DL */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .intro-card {
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .intro-card.ml-card::before {
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+    }
+
+    .intro-card.dl-card::before {
+      background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    }
+
+    .intro-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .intro-card .accent-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .ml-card .accent-label {
+      background: rgba(37, 99, 235, 0.1);
+      color: #2563eb;
+    }
+
+    .dl-card .accent-label {
+      background: rgba(124, 58, 237, 0.1);
+      color: #7c3aed;
+    }
+
+    .intro-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .intro-card ul li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    .intro-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .ml-card ul li::before {
+      background: #2563eb;
+    }
+
+    .dl-card ul li::before {
+      background: #7c3aed;
+    }
+
+    /* ===== Case Study Cards ===== */
+    .case-study {
+      margin-top: 4rem;
+    }
+
+    .case-study-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .case-study-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .case-study.ml-case .case-study-number {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+    }
+
+    .case-study.dl-case .case-study-number {
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    }
+
+    .case-study-header h3 {
+      font-size: 1.5rem;
+    }
+
+    .case-study-header .case-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+    }
+
+    .case-study.ml-case .case-label {
+      color: #2563eb;
+    }
+
+    .case-study.dl-case .case-label {
+      color: #7c3aed;
+    }
+
+    .case-study-body {
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .case-study-body > p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+
+    .suitability-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .suit-card {
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .suit-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .suit-card h4 .icon {
+      font-size: 1.1rem;
+    }
+
+    .suit-card.suits h4 .icon {
+      color: var(--success);
+    }
+
+    .suit-card.doesnt h4 .icon {
+      color: #ef4444;
+    }
+
+    .suit-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .suit-card ul li {
+      padding: 0.3rem 0;
+      padding-left: 1rem;
+      position: relative;
+      color: var(--text-light);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .suit-card.suits ul li::before {
+      content: '+';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: var(--success);
+    }
+
+    .suit-card.doesnt ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: #ef4444;
+    }
+
+    /* ===== Key Differences Section ===== */
+    .differences-section {
+      position: relative;
+    }
+
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .diff-card {
+      padding: 1.75rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .diff-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+
+    .diff-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .diff-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      min-width: 32px;
+      padding-top: 0.15rem;
+    }
+
+    .diff-label.ml {
+      color: #2563eb;
+    }
+
+    .diff-label.dl {
+      color: #7c3aed;
+    }
+
+    .diff-value {
+      font-size: 0.93rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* ===== Conclusion ===== */
+    .conclusion-card {
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+
+    .conclusion-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient);
+    }
+
+    .conclusion-card h3 {
+      margin-bottom: 1rem;
+    }
+
+    .conclusion-card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-light);
+    }
+
+    /* ===== References ===== */
+    .references-section .info-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .references-section .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient);
+    }
+
+    .references-section .info-card ul li {
+      padding: 0.4rem 0;
+      transition: all 0.2s ease;
+    }
+
+    .references-section .info-card ul li:hover {
+      padding-left: 0.5rem;
+      color: var(--text);
+    }
+
+    /* ===== Enhanced Footer ===== */
+    .footer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gradient);
+    }
+
+    /* ===== Reduced Motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .particle-bg .particle {
+        animation: none;
+        display: none;
+      }
+
+      .tilt-card:hover,
+      .glass-card:hover {
+        transform: none;
+      }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .artifact-page-hero {
+        padding: 8rem 0 3rem;
+      }
+
+      .artifact-page-hero h1 {
+        font-size: 2.25rem;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-stat .stat-number {
+        font-size: 1.5rem;
+      }
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .suitability-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .diff-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container">
+      <a href="../../index.html" class="nav-brand"><span>DP</span> Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../index.html#artifacts">Artifacts</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Artifact Hero -->
+    <section class="artifact-page-hero">
+      <div class="hero-grid-pattern" aria-hidden="true"></div>
+      <div class="particle-bg" aria-hidden="true"></div>
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../../index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="../../index.html#artifacts">Artifacts</a>
+          <span aria-hidden="true">/</span>
+          <span class="breadcrumb-current" aria-current="page">ML vs. Deep Learning</span>
+        </nav>
+        <div class="hero-tag">Artifact 2 &bull; Workshop 2</div>
+        <h1>ML vs. Deep Learning: <span class="gradient-text">Real-World Applications</span></h1>
+        <p class="artifact-hero-desc">A comparative analysis evaluating when to use traditional Machine Learning versus Deep Learning, explored through two real-world case studies: Email Spam Detection and Facial Recognition.</p>
+        <div class="artifact-meta">
+          <span class="meta-tag">March 2026</span>
+          <span class="meta-tag">IWU - AI &amp; ML Course</span>
+          <span class="meta-tag">Analytical Comparison</span>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-number">2</span>
+            <span class="stat-label">Case Studies</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">2</span>
+            <span class="stat-label">Approaches Compared</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">4</span>
+            <span class="stat-label">References</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">6</span>
+            <span class="stat-label">Key Differences</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artifact Information -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="100">
+            <h4>Objective</h4>
+            <p>To differentiate between Machine Learning and Deep Learning by analyzing real-world case studies, evaluating which approach best suits different problem domains and why.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
+            <h4>Process</h4>
+            <p>Selected two contrasting applications from coursework, researched real-world implementations, and performed a structured suitability analysis comparing ML and DL for each use case.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="250">
+            <h4>Tools</h4>
+            <p>Comparative analysis frameworks, academic research papers, industry case studies, and structured evaluation criteria for assessing AI approach suitability across different problem domains.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Value Proposition</h4>
+            <p>Demonstrates the ability to evaluate AI approaches critically and make informed technology decisions&mdash;an essential skill for any role that involves selecting, recommending, or implementing AI solutions in enterprise environments.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="400">
+            <h4>Unique Value</h4>
+            <p>Rather than treating ML and DL as interchangeable buzzwords, this analysis shows <strong>when and why</strong> each approach is the right tool for the job. This mirrors real decisions that AI practitioners and enterprise architects face: balancing accuracy, interpretability, data requirements, and computational cost.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="500">
+            <h4>Relevance</h4>
+            <p>Connects directly to my Salesforce background, where choosing the right AI capability for each business problem is critical. Whether it's Einstein Prediction Builder (ML) or Einstein Vision (DL), understanding these trade-offs is what separates effective implementation from wasted investment.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ML vs DL Intro -->
+    <section class="comparison-section">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Understanding the Approaches</div>
+        <h2>Machine Learning vs. Deep Learning</h2>
+
+        <div class="intro-grid">
+          <div class="intro-card ml-card glass-card tilt-card reveal" data-delay="100">
+            <span class="accent-label">Machine Learning</span>
+            <h3>What Is ML?</h3>
+            <p>Machine Learning is a subset of AI where algorithms learn patterns from data to make predictions or decisions without being explicitly programmed for each task.</p>
+            <ul>
+              <li>Uses structured, tabular data effectively</li>
+              <li>Requires manual feature engineering</li>
+              <li>Works well with smaller datasets</li>
+              <li>Models are often interpretable</li>
+              <li>Common algorithms: Decision Trees, SVM, Na&iuml;ve Bayes, Random Forest</li>
+            </ul>
+          </div>
+
+          <div class="intro-card dl-card glass-card tilt-card reveal" data-delay="200">
+            <span class="accent-label">Deep Learning</span>
+            <h3>What Is DL?</h3>
+            <p>Deep Learning is a specialized subset of ML that uses multi-layered neural networks to automatically learn hierarchical representations from raw data.</p>
+            <ul>
+              <li>Excels with unstructured data (images, audio, text)</li>
+              <li>Performs automatic feature extraction</li>
+              <li>Requires large datasets to train effectively</li>
+              <li>Models act as &ldquo;black boxes&rdquo;</li>
+              <li>Common architectures: CNNs, RNNs, Transformers, GANs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="comparison-section">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Real-World Analysis</div>
+        <h2>Case Studies</h2>
+
+        <!-- Case Study 1: Email Spam Detection -->
+        <div class="case-study ml-case reveal">
+          <div class="case-study-header">
+            <div class="case-study-number">1</div>
+            <div>
+              <span class="case-label">Machine Learning Application</span>
+              <h3>Email Spam Detection</h3>
+            </div>
+          </div>
+          <div class="case-study-body glass-card">
+            <p>Email spam detection is one of the most successful and widely deployed applications of traditional Machine Learning. Services like Gmail process billions of messages daily, classifying each as spam or legitimate using ML models that analyze message metadata, sender reputation, keyword frequency, and structural patterns.</p>
+
+            <div class="suitability-grid">
+              <div class="suit-card suits">
+                <h4><span class="icon" aria-hidden="true">&#10003;</span> Why ML Suits This Problem</h4>
+                <ul>
+                  <li><strong>Structured features:</strong> Email data maps naturally to tabular features&mdash;word counts, header info, link patterns, sender history</li>
+                  <li><strong>Interpretability matters:</strong> Organizations need to explain why a message was flagged; Na&iuml;ve Bayes and Decision Trees provide this transparency</li>
+                  <li><strong>Fast inference:</strong> ML models classify emails in milliseconds, critical for real-time filtering at scale</li>
+                  <li><strong>Proven track record:</strong> Na&iuml;ve Bayes classifiers achieved 98%+ accuracy as early as the 2000s with modest compute</li>
+                  <li><strong>Low data requirements:</strong> Effective models can be trained on relatively small labeled datasets</li>
+                </ul>
+              </div>
+              <div class="suit-card doesnt">
+                <h4><span class="icon" aria-hidden="true">&#10007;</span> Why DL Doesn&rsquo;t Fit Well</h4>
+                <ul>
+                  <li><strong>Overkill complexity:</strong> Deep neural networks add unnecessary layers for what is fundamentally a text classification task with clear features</li>
+                  <li><strong>Compute cost:</strong> Training and running DL models for billions of daily emails would be prohibitively expensive</li>
+                  <li><strong>Black-box problem:</strong> Lack of interpretability makes it harder to debug false positives or meet compliance requirements</li>
+                  <li><strong>Diminishing returns:</strong> DL offers marginal accuracy gains over well-tuned ML models for this domain</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case Study 2: Facial Recognition -->
+        <div class="case-study dl-case reveal">
+          <div class="case-study-header">
+            <div class="case-study-number">2</div>
+            <div>
+              <span class="case-label">Deep Learning Application</span>
+              <h3>Facial Recognition</h3>
+            </div>
+          </div>
+          <div class="case-study-body glass-card">
+            <p>Facial recognition systems identify or verify individuals by analyzing facial features in images or video. Modern systems like Apple&rsquo;s Face ID and law enforcement identification tools rely on deep learning&mdash;specifically Convolutional Neural Networks (CNNs)&mdash;to achieve human-level or better accuracy across diverse conditions.</p>
+
+            <div class="suitability-grid">
+              <div class="suit-card suits">
+                <h4><span class="icon" aria-hidden="true">&#10003;</span> Why DL Suits This Problem</h4>
+                <ul>
+                  <li><strong>Automatic feature learning:</strong> CNNs discover facial features (edges, contours, textures) automatically without manual engineering</li>
+                  <li><strong>Handles visual complexity:</strong> DL excels at processing unstructured pixel data across varying lighting, angles, and expressions</li>
+                  <li><strong>Hierarchical representation:</strong> Multiple layers learn progressively abstract features, from edges to facial geometry to identity</li>
+                  <li><strong>State-of-the-art accuracy:</strong> Models like FaceNet achieve 99.63% accuracy on benchmark datasets</li>
+                  <li><strong>Transfer learning:</strong> Pre-trained models can be fine-tuned for specific use cases with less data</li>
+                </ul>
+              </div>
+              <div class="suit-card doesnt">
+                <h4><span class="icon" aria-hidden="true">&#10007;</span> Why ML Doesn&rsquo;t Fit Well</h4>
+                <ul>
+                  <li><strong>Feature engineering bottleneck:</strong> Manually defining facial features is impractical&mdash;what numerical features describe a face?</li>
+                  <li><strong>Cannot handle raw pixels:</strong> Traditional ML algorithms struggle with high-dimensional unstructured image data</li>
+                  <li><strong>Poor generalization:</strong> ML models fail to account for variations in pose, lighting, occlusion, and aging</li>
+                  <li><strong>Accuracy ceiling:</strong> Even the best-engineered ML pipelines plateau far below DL accuracy for visual tasks</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Key Differences -->
+    <section class="differences-section artifact-content reveal">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Summary</div>
+        <h2>Key Differences at a Glance</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card glass-card tilt-card reveal" data-delay="0">
+            <h4>Data Requirements</h4>
+            <div class="diff-row">
+              <span class="diff-label ml">ML</span>
+              <span class="diff-value">Works well with small to medium datasets (hundreds to thousands of samples)</span>
+            </div>
+            <div class="diff-row">
+              <span class="diff-label dl">DL</span>
+              <span class="diff-value">Requires large datasets (thousands to millions) to learn effectively</span>
+            </div>
+          </div>
+
+          <div class="diff-card glass-card tilt-card reveal" data-delay="100">
+            <h4>Feature Engineering</h4>
+            <div class="diff-row">
+              <span class="diff-label ml">ML</span>
+              <span class="diff-value">Requires manual selection and crafting of input features by domain experts</span>
+            </div>
+            <div class="diff-row">
+              <span class="diff-label dl">DL</span>
+              <span class="diff-value">Automatically discovers and extracts relevant features from raw data</span>
+            </div>
+          </div>
+
+          <div class="diff-card glass-card tilt-card reveal" data-delay="200">
+            <h4>Interpretability</h4>
+            <div class="diff-row">
+              <span class="diff-label ml">ML</span>
+              <span class="diff-value">Often transparent&mdash;Decision Trees and linear models show clear reasoning</span>
+            </div>
+            <div class="diff-row">
+              <span class="diff-label dl">DL</span>
+              <span class="diff-value">Black-box models that are difficult to explain or audit</span>
+            </div>
+          </div>
+
+          <div class="diff-card glass-card tilt-card reveal" data-delay="0">
+            <h4>Compute &amp; Hardware</h4>
+            <div class="diff-row">
+              <span class="diff-label ml">ML</span>
+              <span class="diff-value">Runs efficiently on standard CPUs with modest resources</span>
+            </div>
+            <div class="diff-row">
+              <span class="diff-label dl">DL</span>
+              <span class="diff-value">Typically requires GPUs/TPUs and significant compute for training</span>
+            </div>
+          </div>
+
+          <div class="diff-card glass-card tilt-card reveal" data-delay="100">
+            <h4>Best Data Type</h4>
+            <div class="diff-row">
+              <span class="diff-label ml">ML</span>
+              <span class="diff-value">Structured/tabular data&mdash;spreadsheets, databases, feature vectors</span>
+            </div>
+            <div class="diff-row">
+              <span class="diff-label dl">DL</span>
+              <span class="diff-value">Unstructured data&mdash;images, audio, video, natural language text</span>
+            </div>
+          </div>
+
+          <div class="diff-card glass-card tilt-card reveal" data-delay="200">
+            <h4>Training Time</h4>
+            <div class="diff-row">
+              <span class="diff-label ml">ML</span>
+              <span class="diff-value">Minutes to hours, fast iteration cycles for experimentation</span>
+            </div>
+            <div class="diff-row">
+              <span class="diff-label dl">DL</span>
+              <span class="diff-value">Hours to weeks, requires careful hyperparameter tuning</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="conclusion-card glass-card reveal">
+          <h3>Conclusion</h3>
+          <p>Machine Learning and Deep Learning are not competing technologies&mdash;they are complementary tools in the AI practitioner&rsquo;s toolkit. The right choice depends on the problem at hand: the nature of the data, accuracy requirements, interpretability needs, available compute, and deployment constraints.</p>
+          <p>Email Spam Detection demonstrates that traditional ML remains the practical choice when data is structured, interpretability matters, and speed is critical. Facial Recognition shows that Deep Learning is indispensable when the task involves complex, unstructured data that defies manual feature engineering.</p>
+          <p>For enterprise professionals&mdash;especially those working in platforms like Salesforce&mdash;understanding these trade-offs is essential. It&rsquo;s the difference between deploying Einstein Prediction Builder (ML) for lead scoring versus Einstein Vision (DL) for image classification. <strong>The best AI practitioners don&rsquo;t just know how to build models; they know which model to build.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- References -->
+    <section class="artifact-content references-section reveal">
+      <div class="container">
+        <div class="info-card glass-card full-width references-card">
+          <h4>References</h4>
+          <ul>
+            <li>Sahami, M., Dumais, S., Heckerman, D., &amp; Horvitz, E. (1998). A Bayesian Approach to Filtering Junk E-Mail. <em>AAAI Workshop on Learning for Text Categorization</em>.</li>
+            <li>Schroff, F., Kalenichenko, D., &amp; Philbin, J. (2015). FaceNet: A Unified Embedding for Face Recognition and Clustering. <em>IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>.</li>
+            <li>LeCun, Y., Bengio, Y., &amp; Hinton, G. (2015). Deep Learning. <em>Nature</em>, 521(7553), 436&ndash;444.</li>
+            <li>Goodfellow, I., Bengio, Y., &amp; Courville, A. (2016). <em>Deep Learning</em>. MIT Press.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Deepthi Pinninti &bull; AI &amp; ML Portfolio &copy; 2026</p>
+      <p class="footer-sub"><a href="../../index.html">&#8592; Back to Portfolio</a> | Built with GitHub Pages | Indiana Wesleyan University</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Particle Generator ===== */
+    (function initParticles() {
+      var bg = document.querySelector('.particle-bg');
+      if (!bg) return;
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      var colors = [
+        'rgba(37, 99, 235, 0.25)',
+        'rgba(124, 58, 237, 0.2)',
+        'rgba(37, 99, 235, 0.15)',
+        'rgba(124, 58, 237, 0.12)',
+        'rgba(59, 130, 246, 0.18)'
+      ];
+
+      for (var i = 0; i < 30; i++) {
+        var particle = document.createElement('div');
+        particle.classList.add('particle');
+        var size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+        particle.style.animationDelay = (Math.random() * 10) + 's';
+        bg.appendChild(particle);
+      }
+    })();
+  </script>
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>
