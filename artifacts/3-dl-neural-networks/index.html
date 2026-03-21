@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep Learning &amp; Neural Networks | Deepthi Pinninti Portfolio</title>
+  <meta name="description" content="An in-depth exploration of neural network architectures including ANNs, CNNs, RNNs, and GANs, with real-world applications and ethical considerations.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    /* ===== Enhanced Hero ===== */
+    .artifact-page-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 10rem 0 5rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+      color: #f1f5f9;
+    }
+
+    .artifact-page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 350px at 80% 30%, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .artifact-page-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .artifact-page-hero h1 {
+      color: #f1f5f9;
+      font-size: 3.25rem;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .artifact-page-hero .breadcrumb a {
+      color: #94a3b8;
+    }
+
+    .artifact-page-hero .breadcrumb a:hover {
+      color: #e2e8f0;
+    }
+
+    .artifact-page-hero .breadcrumb span {
+      color: #64748b;
+    }
+
+    .artifact-page-hero .breadcrumb .breadcrumb-current {
+      color: #93c5fd;
+    }
+
+    .artifact-page-hero .hero-tag {
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+    }
+
+    .artifact-page-hero .artifact-hero-desc {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .artifact-page-hero .meta-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+    }
+
+    /* ===== Particle Background ===== */
+    .particle-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .particle-bg .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: particleRise linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes particleRise {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-20vh) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* ===== Hero Grid Pattern ===== */
+    .hero-grid-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+    }
+
+    /* ===== Hero Stats Bar ===== */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-stat {
+      text-align: left;
+    }
+
+    .hero-stat .stat-number {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-stat .stat-label {
+      font-size: 0.8rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* ===== Glass Card ===== */
+    .glass-card {
+      background: rgba(248, 250, 252, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(248, 250, 252, 0.85);
+      border-color: rgba(37, 99, 235, 0.25);
+      box-shadow:
+        0 8px 32px rgba(37, 99, 235, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transform: translateY(-4px);
+    }
+
+    /* ===== Tilt Card ===== */
+    .tilt-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .tilt-card:hover {
+      box-shadow:
+        0 20px 40px rgba(37, 99, 235, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ===== Info Card Enhancements ===== */
+    .info-card.glass-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card.glass-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .info-card.glass-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .info-card.glass-card h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card.glass-card h4::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1em;
+      background: var(--gradient);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Enhanced Artifact Content ===== */
+    .artifact-content {
+      position: relative;
+    }
+
+    .artifact-content::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== Network Architecture Section ===== */
+    .network-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .network-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== Network Type Cards ===== */
+    .network-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .network-card {
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .network-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .network-card.ann-card::before {
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+    }
+
+    .network-card.cnn-card::before {
+      background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    }
+
+    .network-card.rnn-card::before {
+      background: linear-gradient(90deg, #10b981, #34d399);
+    }
+
+    .network-card.gan-card::before {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    }
+
+    .network-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .network-card .accent-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .ann-card .accent-label {
+      background: rgba(37, 99, 235, 0.1);
+      color: #2563eb;
+    }
+
+    .cnn-card .accent-label {
+      background: rgba(124, 58, 237, 0.1);
+      color: #7c3aed;
+    }
+
+    .rnn-card .accent-label {
+      background: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+    }
+
+    .gan-card .accent-label {
+      background: rgba(245, 158, 11, 0.1);
+      color: #f59e0b;
+    }
+
+    .network-card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .network-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .network-card ul li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      color: var(--text-light);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .network-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .ann-card ul li::before {
+      background: #2563eb;
+    }
+
+    .cnn-card ul li::before {
+      background: #7c3aed;
+    }
+
+    .rnn-card ul li::before {
+      background: #10b981;
+    }
+
+    .gan-card ul li::before {
+      background: #f59e0b;
+    }
+
+    /* ===== How Neural Networks Learn ===== */
+    .learning-section {
+      position: relative;
+    }
+
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .learning-card {
+      padding: 1.75rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .learning-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .learning-card p {
+      font-size: 0.93rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: white;
+      background: var(--gradient);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ===== Ethics Section ===== */
+    .ethics-card {
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+
+    .ethics-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ef4444, #f59e0b);
+    }
+
+    .ethics-card h3 {
+      margin-bottom: 1rem;
+    }
+
+    .ethics-card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .ethics-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .ethics-card ul li {
+      padding: 0.4rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .ethics-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.85rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ef4444;
+    }
+
+    /* ===== Conclusion ===== */
+    .conclusion-card {
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+
+    .conclusion-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient);
+    }
+
+    .conclusion-card h3 {
+      margin-bottom: 1rem;
+    }
+
+    .conclusion-card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-light);
+    }
+
+    /* ===== References ===== */
+    .references-section .info-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .references-section .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient);
+    }
+
+    .references-section .info-card ul li {
+      padding: 0.4rem 0;
+      transition: all 0.2s ease;
+    }
+
+    .references-section .info-card ul li:hover {
+      padding-left: 0.5rem;
+      color: var(--text);
+    }
+
+    /* ===== Enhanced Footer ===== */
+    .footer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gradient);
+    }
+
+    /* ===== Reduced Motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .particle-bg .particle {
+        animation: none;
+        display: none;
+      }
+
+      .tilt-card:hover,
+      .glass-card:hover {
+        transform: none;
+      }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .artifact-page-hero {
+        padding: 8rem 0 3rem;
+      }
+
+      .artifact-page-hero h1 {
+        font-size: 2.25rem;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-stat .stat-number {
+        font-size: 1.5rem;
+      }
+
+      .network-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .learning-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container">
+      <a href="../../index.html" class="nav-brand"><span>DP</span> Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../index.html#artifacts">Artifacts</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Artifact Hero -->
+    <section class="artifact-page-hero">
+      <div class="hero-grid-pattern" aria-hidden="true"></div>
+      <div class="particle-bg" aria-hidden="true"></div>
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../../index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="../../index.html#artifacts">Artifacts</a>
+          <span aria-hidden="true">/</span>
+          <span class="breadcrumb-current" aria-current="page">Deep Learning &amp; Neural Networks</span>
+        </nav>
+        <div class="hero-tag">Artifact 3 &bull; Workshop 3</div>
+        <h1>Deep Learning &amp; <span class="gradient-text">Neural Networks</span></h1>
+        <p class="artifact-hero-desc">An in-depth exploration of how neural networks learn, the four major architectures that power modern AI, and the ethical responsibilities that come with these powerful technologies.</p>
+        <div class="artifact-meta">
+          <span class="meta-tag">March 2026</span>
+          <span class="meta-tag">IWU - AI &amp; ML Course</span>
+          <span class="meta-tag">Technical Analysis</span>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-number">4</span>
+            <span class="stat-label">Architectures</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">11</span>
+            <span class="stat-label">Key Milestones</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">5</span>
+            <span class="stat-label">References</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">4</span>
+            <span class="stat-label">Learning Steps</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artifact Information -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="100">
+            <h4>Objective</h4>
+            <p>To explore the core architectures behind deep learning, understand how neural networks learn from data, and examine the ethical considerations surrounding synthetic data generation and deepfakes.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
+            <h4>Process</h4>
+            <p>Studied the foundational concepts of neural networks from course materials and academic sources. Analyzed four major architectures, mapped their real-world applications, and evaluated the ethical implications of generative models in practice.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="250">
+            <h4>Tools</h4>
+            <p>Course lecture materials, IBM deep learning documentation, academic research papers on neural network architectures, and industry case studies covering applications in image recognition, natural language processing, and generative AI.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Value Proposition</h4>
+            <p>Demonstrates the ability to break down complex technical concepts into clear, practical explanations that connect theory to real-world use cases. This skill is essential for any role that involves evaluating, recommending, or implementing AI solutions.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="400">
+            <h4>Unique Value</h4>
+            <p>This artifact goes beyond surface-level definitions by connecting each neural network architecture to the specific problems it solves best. Understanding why CNNs excel at images while RNNs handle sequences is the kind of practical knowledge that separates someone who understands AI from someone who can actually apply it in an enterprise setting.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="500">
+            <h4>Relevance</h4>
+            <p>Salesforce continues to embed deep learning into its platform through Einstein Vision, Einstein Language, and the newer Agentforce capabilities. Understanding the neural network architectures behind these tools allows me to make better implementation decisions and communicate technical trade-offs to stakeholders effectively.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- How Neural Networks Learn -->
+    <section class="learning-section network-section">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Foundation</div>
+        <h2>How Neural Networks Learn</h2>
+        <p style="max-width:700px;margin:0 auto 1rem;text-align:center;color:var(--text-light);font-size:1.05rem;line-height:1.7;">Neural networks are inspired by the human brain. They consist of interconnected layers of nodes that process data, recognize patterns, and improve their accuracy over time through a structured learning process.</p>
+
+        <div class="learning-grid">
+          <div class="learning-card glass-card tilt-card reveal" data-delay="0">
+            <div class="step-number">1</div>
+            <h4>Input Layer</h4>
+            <p>Raw data enters the network through the input layer. Each node receives a piece of the data, which could be pixel values from an image, words from a sentence, or numbers from a spreadsheet.</p>
+          </div>
+
+          <div class="learning-card glass-card tilt-card reveal" data-delay="100">
+            <div class="step-number">2</div>
+            <h4>Hidden Layers and Weights</h4>
+            <p>Data passes through hidden layers where each connection carries a weight. These weights determine how much influence one node has on the next.</p>
+            <p>The network adjusts these weights during training to improve its predictions. Deeper networks can learn more complex patterns.</p>
+          </div>
+
+          <div class="learning-card glass-card tilt-card reveal" data-delay="200">
+            <div class="step-number">3</div>
+            <h4>Activation Functions</h4>
+            <p>Activation functions decide whether a node should fire or stay silent. Common functions include ReLU, Sigmoid, and Tanh.</p>
+            <p>Without activation functions, a neural network would only learn simple linear relationships, limiting its ability to solve complex problems.</p>
+          </div>
+
+          <div class="learning-card glass-card tilt-card reveal" data-delay="300">
+            <div class="step-number">4</div>
+            <h4>Backpropagation</h4>
+            <p>After making a prediction, the network calculates the error by comparing it to the correct answer. Backpropagation sends this error backward through the network, adjusting weights layer by layer.</p>
+            <p>This cycle repeats thousands of times until the model reaches an acceptable level of accuracy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Neural Network Architectures -->
+    <section class="network-section">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Architectures</div>
+        <h2>Types of Neural Networks</h2>
+
+        <div class="network-grid">
+          <div class="network-card ann-card glass-card tilt-card reveal" data-delay="100">
+            <span class="accent-label">ANN</span>
+            <h3>Artificial Neural Networks</h3>
+            <p>ANNs are the foundation for all other architectures. They consist of an input layer, one or more hidden layers, and an output layer, with data flowing in one direction from input to output.</p>
+            <ul>
+              <li>Best suited for structured, tabular data</li>
+              <li>Used for classification and regression tasks</li>
+              <li>Easier to train and interpret than deeper models</li>
+              <li>Applications include credit scoring, customer churn prediction, and medical diagnosis</li>
+            </ul>
+          </div>
+
+          <div class="network-card cnn-card glass-card tilt-card reveal" data-delay="200">
+            <span class="accent-label">CNN</span>
+            <h3>Convolutional Neural Networks</h3>
+            <p>CNNs are designed specifically for processing visual data. They use convolutional layers that scan an image with small filters to detect features like edges, textures, and shapes.</p>
+            <p>These detected features build up to more complex patterns in deeper layers, allowing the network to recognize full objects from simple components.</p>
+            <ul>
+              <li>Excels at image recognition and object detection</li>
+              <li>Uses pooling layers to reduce data size while keeping key features</li>
+              <li>AlexNet winning ImageNet in 2012 proved their power</li>
+              <li>Applications include facial recognition, medical imaging, and self-driving cars</li>
+            </ul>
+          </div>
+
+          <div class="network-card rnn-card glass-card tilt-card reveal" data-delay="300">
+            <span class="accent-label">RNN</span>
+            <h3>Recurrent Neural Networks</h3>
+            <p>RNNs are built to handle sequential data where the order matters. Unlike standard neural networks, RNNs have loops that allow information from previous steps to persist.</p>
+            <p>This gives the network a form of memory, enabling it to understand context and relationships across time steps in the data.</p>
+            <ul>
+              <li>Processes data in sequences, one step at a time</li>
+              <li>Handles variable-length inputs naturally</li>
+              <li>LSTM and GRU variants solve the vanishing gradient problem</li>
+              <li>Applications include language translation, speech recognition, and stock price forecasting</li>
+            </ul>
+          </div>
+
+          <div class="network-card gan-card glass-card tilt-card reveal" data-delay="400">
+            <span class="accent-label">GAN</span>
+            <h3>Generative Adversarial Networks</h3>
+            <p>GANs consist of two networks competing against each other. The Generator creates synthetic data, while the Discriminator tries to distinguish real data from fake.</p>
+            <p>Through this competition, the Generator learns to produce increasingly realistic outputs over time.</p>
+            <ul>
+              <li>Introduced by Ian Goodfellow in 2014</li>
+              <li>Generates realistic images, audio, and video</li>
+              <li>Used in data augmentation when training data is limited</li>
+              <li>Applications include art generation, image enhancement, and drug discovery</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ethical Considerations -->
+    <section class="network-section artifact-content reveal">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Responsibility</div>
+        <h2>Ethical Considerations</h2>
+
+        <div class="ethics-card glass-card">
+          <h3>The Deepfake Challenge</h3>
+          <p>The same GAN technology that enables creative applications also raises serious ethical concerns. Deepfakes can produce highly convincing fake videos, images, and audio that are increasingly difficult to distinguish from real content.</p>
+          <p>Understanding these risks is just as important as understanding the technology itself. Responsible AI development means considering how these tools can be misused and what safeguards should be in place.</p>
+          <ul>
+            <li>Deepfakes can spread misinformation and manipulate public opinion through fabricated video or audio content</li>
+            <li>Identity fraud risks increase as face and voice synthesis become more realistic and accessible</li>
+            <li>Organizations need clear policies for disclosing AI-generated content to maintain trust</li>
+            <li>Detection tools and digital watermarking are emerging as countermeasures, but they remain an ongoing challenge</li>
+            <li>Regulations around synthetic media are still evolving, making ethical self-governance essential for AI professionals</li>
+          </ul>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="conclusion-card glass-card reveal">
+          <h3>Conclusion</h3>
+          <p>Each neural network architecture is designed to solve a different category of problems. ANNs handle structured data, CNNs process visual information, RNNs understand sequences, and GANs generate entirely new data. As these networks become more capable, building AI solutions that are both effective and ethical requires understanding not just how these systems work, but also how they impact the world around us.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Reflection</div>
+        <h2>Artifact Reflection</h2>
+
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="100">
+            <h4>Audience Customization</h4>
+            <p>This artifact was structured for students and professionals who want to understand the architectures that power real AI products.</p>
+            <p>Each network type is connected to practical applications readers can relate to, from facial recognition on phones to language translation tools used every day.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
+            <h4>Lessons Learned</h4>
+            <p>Before this, I thought of deep learning as one single approach. Now I can see how each architecture was designed to handle a specific type of data and problem.</p>
+            <p>I also gained a deeper awareness of the ethical responsibilities that come with generative AI technologies like GANs.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Feedback Received</h4>
+            <p>From previous artifacts, I received feedback about maintaining consistent formatting and clean sentence structure. Reviewers emphasized that content should read naturally and avoid unnecessary special characters or symbols.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="400">
+            <h4>Revisions Applied</h4>
+            <p>I applied all formatting lessons from earlier artifacts to this one from the start, including clean punctuation, natural sentence flow, and consistent styling. Clear section headers and visual hierarchy were used to make complex concepts accessible without sacrificing accuracy.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- References -->
+    <section class="artifact-content references-section reveal">
+      <div class="container">
+        <div class="info-card glass-card full-width references-card">
+          <h4>References</h4>
+          <ul>
+            <li>McCulloch, W. S., &amp; Pitts, W. (1943). A Logical Calculus of the Ideas Immanent in Nervous Activity. <em>Bulletin of Mathematical Biophysics</em>, 5(4), 115-133.</li>
+            <li>Rumelhart, D. E., Hinton, G. E., &amp; Williams, R. J. (1986). Learning representations by back-propagating errors. <em>Nature</em>, 323, 533-536.</li>
+            <li>Goodfellow, I., et al. (2014). Generative Adversarial Networks. <em>arXiv:1406.2661</em>.</li>
+            <li>Vaswani, A., et al. (2017). Attention Is All You Need. <em>Advances in Neural Information Processing Systems</em>, 30.</li>
+            <li>IBM. (2024). What is Deep Learning? What is a Neural Network? <em>IBM Technology Documentation</em>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Deepthi Pinninti &bull; AI &amp; ML Portfolio &copy; 2026</p>
+      <p class="footer-sub"><a href="../../index.html">&#8592; Back to Portfolio</a> | Built with GitHub Pages | Indiana Wesleyan University</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Particle Generator ===== */
+    (function initParticles() {
+      var bg = document.querySelector('.particle-bg');
+      if (!bg) return;
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      var colors = [
+        'rgba(37, 99, 235, 0.25)',
+        'rgba(16, 185, 129, 0.2)',
+        'rgba(37, 99, 235, 0.15)',
+        'rgba(124, 58, 237, 0.12)',
+        'rgba(16, 185, 129, 0.18)'
+      ];
+
+      for (var i = 0; i < 30; i++) {
+        var particle = document.createElement('div');
+        particle.classList.add('particle');
+        var size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+        particle.style.animationDelay = (Math.random() * 10) + 's';
+        bg.appendChild(particle);
+      }
+    })();
+  </script>
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>
