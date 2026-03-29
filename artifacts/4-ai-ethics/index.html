@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Ethics &amp; Responsible AI | Deepthi Pinninti Portfolio</title>
+  <meta name="description" content="An exploration of ethical challenges in AI including bias, privacy, transparency, and accountability with real-world case studies and enterprise applications.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    /* ===== Enhanced Hero ===== */
+    .artifact-page-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 10rem 0 5rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+      color: #f1f5f9;
+    }
+
+    .artifact-page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 350px at 80% 30%, rgba(239, 68, 68, 0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .artifact-page-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .artifact-page-hero h1 {
+      color: #f1f5f9;
+      font-size: 3.25rem;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .artifact-page-hero .breadcrumb a { color: #94a3b8; }
+    .artifact-page-hero .breadcrumb a:hover { color: #e2e8f0; }
+    .artifact-page-hero .breadcrumb span { color: #64748b; }
+    .artifact-page-hero .breadcrumb .breadcrumb-current { color: #93c5fd; }
+
+    .artifact-page-hero .hero-tag {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+
+    .artifact-page-hero .artifact-hero-desc {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .artifact-page-hero .meta-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+    }
+
+    /* ===== Particle Background ===== */
+    .particle-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .particle-bg .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: particleRise linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes particleRise {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+    }
+
+    /* ===== Hero Grid Pattern ===== */
+    .hero-grid-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(239, 68, 68, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(239, 68, 68, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+    }
+
+    /* ===== Hero Stats Bar ===== */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-stat { text-align: left; }
+
+    .hero-stat .stat-number {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-stat .stat-label {
+      font-size: 0.8rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* ===== Glass Card ===== */
+    .glass-card {
+      background: rgba(248, 250, 252, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(248, 250, 252, 0.85);
+      border-color: rgba(37, 99, 235, 0.25);
+      box-shadow: 0 8px 32px rgba(37, 99, 235, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transform: translateY(-4px);
+    }
+
+    /* ===== Tilt Card ===== */
+    .tilt-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .tilt-card:hover {
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1), 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ===== Info Card Enhancements ===== */
+    .info-card.glass-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card.glass-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .info-card.glass-card:hover::after { transform: scaleX(1); }
+
+    .info-card.glass-card h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card.glass-card h4::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1em;
+      background: var(--gradient);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Enhanced Artifact Content ===== */
+    .artifact-content {
+      position: relative;
+    }
+
+    .artifact-content::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== Pillar Section ===== */
+    .pillar-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== Pillar Cards ===== */
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .pillar-card {
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+
+    .pillar-card.bias-card::before { background: linear-gradient(90deg, #ef4444, #f87171); }
+    .pillar-card.privacy-card::before { background: linear-gradient(90deg, #2563eb, #3b82f6); }
+    .pillar-card.transparency-card::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .pillar-card.accountability-card::before { background: linear-gradient(90deg, #10b981, #34d399); }
+
+    .pillar-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar-card .accent-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .bias-card .accent-label { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+    .privacy-card .accent-label { background: rgba(37, 99, 235, 0.1); color: #2563eb; }
+    .transparency-card .accent-label { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+    .accountability-card .accent-label { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+
+    .pillar-card p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+
+    .pillar-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .pillar-card ul li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      color: var(--text-light);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .pillar-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .bias-card ul li::before { background: #ef4444; }
+    .privacy-card ul li::before { background: #2563eb; }
+    .transparency-card ul li::before { background: #f59e0b; }
+    .accountability-card ul li::before { background: #10b981; }
+
+    /* ===== Case Study Section ===== */
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .case-card {
+      padding: 1.75rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .case-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .case-card p {
+      font-size: 0.93rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .case-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      font-size: 1rem;
+      color: white;
+      background: var(--gradient);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ===== Conclusion ===== */
+    .conclusion-card {
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+
+    .conclusion-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gradient);
+    }
+
+    .conclusion-card h3 { margin-bottom: 1rem; }
+
+    .conclusion-card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-light);
+    }
+
+    /* ===== References ===== */
+    .references-section .info-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .references-section .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+    }
+
+    .references-section .info-card ul li {
+      padding: 0.4rem 0;
+      transition: all 0.2s ease;
+    }
+
+    .references-section .info-card ul li:hover {
+      padding-left: 0.5rem;
+      color: var(--text);
+    }
+
+    /* ===== Enhanced Footer ===== */
+    .footer { position: relative; overflow: hidden; }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--gradient);
+    }
+
+    /* ===== Reduced Motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .particle-bg .particle { animation: none; display: none; }
+      .tilt-card:hover, .glass-card:hover { transform: none; }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .artifact-page-hero { padding: 8rem 0 3rem; }
+      .artifact-page-hero h1 { font-size: 2.25rem; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      .hero-stat .stat-number { font-size: 1.5rem; }
+      .pillar-grid { grid-template-columns: 1fr; }
+      .case-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container">
+      <a href="../../index.html" class="nav-brand"><span>DP</span> Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../index.html#artifacts">Artifacts</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Artifact Hero -->
+    <section class="artifact-page-hero">
+      <div class="hero-grid-pattern" aria-hidden="true"></div>
+      <div class="particle-bg" aria-hidden="true"></div>
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../../index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="../../index.html#artifacts">Artifacts</a>
+          <span aria-hidden="true">/</span>
+          <span class="breadcrumb-current" aria-current="page">AI Ethics &amp; Responsible AI</span>
+        </nav>
+        <div class="hero-tag">Artifact 4 &bull; Workshop 4</div>
+        <h1>AI Ethics &amp; <span class="gradient-text">Responsible AI</span></h1>
+        <p class="artifact-hero-desc">An analysis of the ethical challenges facing AI today, covering bias, privacy, transparency, and accountability through real-world case studies and enterprise applications.</p>
+        <div class="artifact-meta">
+          <span class="meta-tag">March 2026</span>
+          <span class="meta-tag">IWU - AI &amp; ML Course</span>
+          <span class="meta-tag">Ethical Analysis</span>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-number">4</span>
+            <span class="stat-label">Core Pillars</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Case Studies</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">5</span>
+            <span class="stat-label">References</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">1</span>
+            <span class="stat-label">Framework</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artifact Information -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="100">
+            <h4>Objective</h4>
+            <p>To identify and analyze the core ethical challenges in AI development, including algorithmic bias, data privacy, model transparency, and accountability in automated decision-making.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
+            <h4>Process</h4>
+            <p>Researched real-world AI ethics incidents from industry reports and academic sources. Mapped each ethical challenge to a core pillar, analyzed its impact, and connected the findings to enterprise AI practices.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="250">
+            <h4>Tools</h4>
+            <p>Course materials on responsible AI, industry ethics frameworks from Salesforce and Google, published case studies on AI bias and privacy, and regulatory guidelines including the EU AI Act.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Value Proposition</h4>
+            <p>Shows the ability to evaluate AI systems beyond technical performance and assess their societal impact. This is a critical skill for professionals who deploy AI in healthcare, finance, hiring, and customer-facing platforms.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="400">
+            <h4>Unique Value</h4>
+            <p>Most AI portfolios focus only on building models. This artifact demonstrates the ability to think critically about what happens after a model is deployed, who it affects, and what safeguards are needed to prevent harm.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="500">
+            <h4>Relevance</h4>
+            <p>Salesforce has built its entire AI strategy around Trusted AI principles. Understanding bias detection, data privacy, and transparent AI directly connects to how Einstein features are designed, deployed, and governed in enterprise environments.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Four Pillars of AI Ethics -->
+    <section class="pillar-section">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Core Pillars</div>
+        <h2>Four Pillars of Responsible AI</h2>
+
+        <div class="pillar-grid">
+          <div class="pillar-card bias-card glass-card tilt-card reveal" data-delay="100">
+            <span class="accent-label">Pillar 1</span>
+            <h3>Bias and Fairness</h3>
+            <p>If training data contains biases, the model will reproduce and amplify them, leading to unfair outcomes in hiring, lending, and healthcare.</p>
+            <ul>
+              <li>Amazon scrapped an AI hiring tool that penalized resumes containing the word "women's"</li>
+              <li>Facial recognition systems show higher error rates for people with darker skin tones</li>
+              <li>Mitigation requires diverse datasets, regular audits, and fairness-aware algorithms</li>
+            </ul>
+          </div>
+
+          <div class="pillar-card privacy-card glass-card tilt-card reveal" data-delay="200">
+            <span class="accent-label">Pillar 2</span>
+            <h3>Data Privacy</h3>
+            <p>AI systems need large amounts of personal data to train. Without proper consent and safeguards, this creates serious privacy risks for individuals.</p>
+            <ul>
+              <li>The Cambridge Analytica scandal exposed how personal data can be misused at scale</li>
+              <li>GDPR and CCPA require explicit consent and the right to data deletion</li>
+              <li>Techniques like differential privacy and federated learning help protect user data</li>
+            </ul>
+          </div>
+
+          <div class="pillar-card transparency-card glass-card tilt-card reveal" data-delay="300">
+            <span class="accent-label">Pillar 3</span>
+            <h3>Transparency and Explainability</h3>
+            <p>Many AI models operate as black boxes. In high-stakes areas like healthcare or criminal sentencing, people have a right to understand how decisions are made.</p>
+            <ul>
+              <li>The COMPAS recidivism tool was criticized for unexplainable risk scores in sentencing</li>
+              <li>Explainable AI (XAI) methods like SHAP and LIME help interpret model decisions</li>
+              <li>The EU AI Act requires transparency for high-risk AI systems</li>
+            </ul>
+          </div>
+
+          <div class="pillar-card accountability-card glass-card tilt-card reveal" data-delay="400">
+            <span class="accent-label">Pillar 4</span>
+            <h3>Accountability</h3>
+            <p>When AI causes harm, there must be clear ownership. Without accountability, organizations can deflect blame onto algorithms.</p>
+            <ul>
+              <li>Self-driving car incidents raised questions about who is liable when AI fails</li>
+              <li>Human-in-the-loop systems ensure people can override automated decisions</li>
+              <li>Regular model monitoring and audit trails are essential for accountability</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real-World Case Studies -->
+    <section class="pillar-section artifact-content">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Real-World Impact</div>
+        <h2>Case Studies</h2>
+
+        <div class="case-grid">
+          <div class="case-card glass-card tilt-card reveal" data-delay="0">
+            <div class="case-icon" aria-hidden="true">1</div>
+            <h4>Healthcare: IBM Watson Oncology</h4>
+            <p>IBM Watson was marketed as a cancer treatment advisor but was found to sometimes recommend unsafe treatments. It was trained on synthetic cases rather than real patient data, raising concerns about AI in life-critical decisions.</p>
+          </div>
+
+          <div class="case-card glass-card tilt-card reveal" data-delay="100">
+            <div class="case-icon" aria-hidden="true">2</div>
+            <h4>Finance: Apple Card Gender Bias</h4>
+            <p>In 2019, Apple Card offered significantly lower credit limits to women than men with similar financial profiles. This showed how AI can produce discriminatory outcomes through hidden correlations in training data, even without gender as an input.</p>
+          </div>
+
+          <div class="case-card glass-card tilt-card reveal" data-delay="200">
+            <div class="case-icon" aria-hidden="true">3</div>
+            <h4>Enterprise: Salesforce Trusted AI</h4>
+            <p>Salesforce embeds ethical AI principles through its Trusted AI framework. Einstein includes bias detection, transparency reports, and data governance controls that help organizations deploy AI responsibly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section class="pillar-section artifact-content reveal">
+      <div class="container">
+        <div class="conclusion-card glass-card reveal">
+          <h3>Conclusion</h3>
+          <p>Building AI that works is only half the challenge. Making it fair, private, transparent, and accountable is what makes it trustworthy. Professionals who understand these ethical dimensions will be the ones who build systems that organizations and users can genuinely rely on.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Reflection</div>
+        <h2>Artifact Reflection</h2>
+
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="100">
+            <h4>Audience Customization</h4>
+            <p>This artifact was designed for students and professionals who need to understand the ethical responsibilities of deploying AI. Each pillar is supported with real incidents that show the consequences of ignoring ethics.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
+            <h4>Lessons Learned</h4>
+            <p>This artifact made me realize that technical accuracy alone does not make an AI system good. A model can perform well but still cause harm if it is biased or deployed without oversight. I also learned how platforms like Salesforce are actively building ethics into their AI tools.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Feedback Received</h4>
+            <p>Peers suggested adding more real-world examples to make ethical concepts feel practical rather than theoretical. They also recommended connecting each pillar to specific industries where the impact is most visible.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="400">
+            <h4>Revisions Applied</h4>
+            <p>Based on the feedback, I added case studies from healthcare, finance, and enterprise platforms to ground each ethical pillar in real incidents. The four-pillar structure was refined to give each challenge its own distinct focus rather than grouping them together.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- References -->
+    <section class="artifact-content references-section reveal">
+      <div class="container">
+        <div class="info-card glass-card full-width references-card">
+          <h4>References</h4>
+          <ul>
+            <li>Buolamwini, J., &amp; Gebru, T. (2018). Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification. <em>Proceedings of Machine Learning Research</em>, 81, 1-15.</li>
+            <li>European Commission. (2024). The EU Artificial Intelligence Act. <em>Official Journal of the European Union</em>.</li>
+            <li>Salesforce. (2024). Trusted AI Principles. <em>Salesforce AI Ethics Documentation</em>.</li>
+            <li>Dastin, J. (2018). Amazon scraps secret AI recruiting tool that showed bias against women. <em>Reuters</em>.</li>
+            <li>Floridi, L., et al. (2018). AI4People: An Ethical Framework for a Good AI Society. <em>Minds and Machines</em>, 28(4), 689-707.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Deepthi Pinninti &bull; AI &amp; ML Portfolio &copy; 2026</p>
+      <p class="footer-sub"><a href="../../index.html">&#8592; Back to Portfolio</a> | Built with GitHub Pages | Indiana Wesleyan University</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Particle Generator ===== */
+    (function initParticles() {
+      var bg = document.querySelector('.particle-bg');
+      if (!bg) return;
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      var colors = [
+        'rgba(239, 68, 68, 0.2)',
+        'rgba(37, 99, 235, 0.2)',
+        'rgba(239, 68, 68, 0.12)',
+        'rgba(124, 58, 237, 0.15)',
+        'rgba(37, 99, 235, 0.15)'
+      ];
+
+      for (var i = 0; i < 30; i++) {
+        var particle = document.createElement('div');
+        particle.classList.add('particle');
+        var size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+        particle.style.animationDelay = (Math.random() * 10) + 's';
+        bg.appendChild(particle);
+      }
+    })();
+  </script>
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>
