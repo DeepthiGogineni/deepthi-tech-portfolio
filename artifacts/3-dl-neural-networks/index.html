@@ -655,32 +655,53 @@
       <div class="container">
         <div class="artifact-info-grid">
 
-          <div class="info-card glass-card reveal" data-delay="100">
+          <div class="info-card glass-card reveal" data-delay="0">
+            <h4>Introduction</h4>
+            <p>This artifact was created for Workshop 3 in the AI and Machine Learning course at Indiana Wesleyan University. Deep learning powers the most visible AI applications today, from facial recognition to language translation to generative art. But behind these applications are distinct neural network architectures, each designed for a specific type of problem. This artifact breaks down the four foundational architectures and explains how neural networks actually learn, giving readers the practical knowledge to evaluate and apply these technologies in real settings.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="50">
+            <h4>Description</h4>
+            <p>A technical analysis covering four major neural network architectures: Artificial Neural Networks (ANNs) for structured data tasks like classification and regression, Convolutional Neural Networks (CNNs) for visual data including image recognition and object detection, Recurrent Neural Networks (RNNs) and their LSTM variants for sequential data like language and time series, and Generative Adversarial Networks (GANs) for synthetic data generation. The artifact also walks through the four-step learning process shared by all neural networks: input processing, weighted connections through hidden layers, activation functions, and backpropagation. An ethics section addresses the deepfake challenge created by GANs.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
             <h4>Objective</h4>
             <p>To explore the core architectures behind deep learning, understand how neural networks learn from data, and examine the ethical considerations surrounding synthetic data generation and deepfakes.</p>
           </div>
 
-          <div class="info-card glass-card reveal" data-delay="200">
-            <h4>Process</h4>
-            <p>Studied the foundational concepts of neural networks from course materials and academic sources. Analyzed four major architectures, mapped their real-world applications, and evaluated the ethical implications of generative models in practice.</p>
-          </div>
-
-          <div class="info-card glass-card reveal" data-delay="250">
-            <h4>Tools</h4>
-            <p>Course lecture materials, IBM deep learning documentation, academic research papers on neural network architectures, and industry case studies covering applications in image recognition, natural language processing, and generative AI.</p>
-          </div>
-
           <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Process</h4>
+            <ol style="padding-left:1.25rem;line-height:1.9;color:var(--text-light);font-size:0.95rem;">
+  <li>Identified the four architectures to analyze based on their industry prevalence and distinct problem domains: ANNs for structured data, CNNs for computer vision, RNNs for sequential data, and GANs for generative tasks.</li>
+  <li>Researched each architecture from primary sources including foundational papers (McCulloch and Pitts 1943, Goodfellow 2014, Vaswani 2017) and IBM deep learning production documentation.</li>
+  <li>Mapped each architecture to specific real-world applications to bridge theory and practice. AlexNet winning ImageNet in 2012 by a 10-point margin is more meaningful than memorizing CNN layer types.</li>
+  <li>Documented the four-step learning process shared by all neural networks (input, weighted connections, activation functions, backpropagation) as a unifying foundation across all architectures.</li>
+  <li>Added an ethics section on deepfakes and GAN misuse to ensure the analysis addressed responsible deployment, not just technical capability.</li>
+</ol>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="350">
+            <h4>Tools</h4>
+            <ul style="padding-left:1.25rem;line-height:1.9;color:var(--text-light);font-size:0.95rem;">
+  <li><strong>IBM Deep Learning Documentation</strong> - chosen as a primary technical reference because IBM provides production-grade guidance on how these architectures are implemented at enterprise scale, not just academic theory.</li>
+  <li><strong>Foundational academic papers (McCulloch-Pitts, Goodfellow, Vaswani)</strong> - used to ensure architecture descriptions reflect original intent and terminology, giving the analysis academic credibility.</li>
+  <li><strong>Real-world application mapping</strong> - used as an analytical method to connect each architecture to the class of problems it was designed for, making the content actionable for practitioners.</li>
+  <li><strong>AlexNet/ImageNet case study</strong> - included because it provides a concrete, measurable outcome (top-5 error rate reduced from 26 percent to 15.3 percent) that illustrates the magnitude of CNNs' impact.</li>
+</ul>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="400">
             <h4>Value Proposition</h4>
             <p>Demonstrates the ability to break down complex technical concepts into clear, practical explanations that connect theory to real-world use cases. This skill is essential for any role that involves evaluating, recommending, or implementing AI solutions.</p>
           </div>
 
-          <div class="info-card glass-card full-width reveal" data-delay="400">
+          <div class="info-card glass-card full-width reveal" data-delay="500">
             <h4>Unique Value</h4>
             <p>This artifact goes beyond surface-level definitions by connecting each neural network architecture to the specific problems it solves best. Understanding why CNNs excel at images while RNNs handle sequences is the kind of practical knowledge that separates someone who understands AI from someone who can actually apply it in an enterprise setting.</p>
           </div>
 
-          <div class="info-card glass-card full-width reveal" data-delay="500">
+          <div class="info-card glass-card full-width reveal" data-delay="600">
             <h4>Relevance</h4>
             <p>Salesforce continues to embed deep learning into its platform through Einstein Vision, Einstein Language, and the newer Agentforce capabilities. Understanding the neural network architectures behind these tools allows me to make better implementation decisions and communicate technical trade-offs to stakeholders effectively.</p>
           </div>

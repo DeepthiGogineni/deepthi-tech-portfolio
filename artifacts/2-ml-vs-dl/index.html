@@ -707,32 +707,53 @@
       <div class="container">
         <div class="artifact-info-grid">
 
-          <div class="info-card glass-card reveal" data-delay="100">
+          <div class="info-card glass-card reveal" data-delay="0">
+            <h4>Introduction</h4>
+            <p>This artifact was created for Workshop 2 in the AI and Machine Learning course at Indiana Wesleyan University. It addresses one of the most common questions in applied AI: when should you use traditional Machine Learning versus Deep Learning? Rather than treating this as a theoretical question, the artifact works through two real applications to show that the right answer depends on the nature of the data, the interpretability requirements, the available compute, and the business context.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="50">
+            <h4>Description</h4>
+            <p>A structured comparative analysis built around two contrasting case studies. Case Study 1 examines Email Spam Detection, where traditional Machine Learning using Naive Bayes classifiers achieves over 98 percent accuracy with structured features, fast inference, and full interpretability. Case Study 2 examines Facial Recognition, where Deep Learning using Convolutional Neural Networks is the only practical approach given the unstructured nature of pixel data. The artifact also includes a six-dimension comparison table covering data requirements, feature engineering, interpretability, compute needs, best data types, and training time.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
             <h4>Objective</h4>
             <p>To differentiate between Machine Learning and Deep Learning by analyzing real-world case studies, evaluating which approach best suits different problem domains and why.</p>
           </div>
 
-          <div class="info-card glass-card reveal" data-delay="200">
-            <h4>Process</h4>
-            <p>Selected two contrasting applications from coursework, researched real-world implementations, and performed a structured suitability analysis comparing ML and DL for each use case.</p>
-          </div>
-
-          <div class="info-card glass-card reveal" data-delay="250">
-            <h4>Tools</h4>
-            <p>Comparative analysis frameworks, academic research papers, industry case studies, and structured evaluation criteria for assessing AI approach suitability across different problem domains.</p>
-          </div>
-
           <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Process</h4>
+            <ol style="padding-left:1.25rem;line-height:1.9;color:var(--text-light);font-size:0.95rem;">
+  <li>Defined the central research question: under what conditions should an organization choose traditional Machine Learning over Deep Learning, and vice versa?</li>
+  <li>Selected two real-world applications that sit at opposite ends of the spectrum. Email Spam Detection represents structured-data ML at scale. Facial Recognition represents unstructured-data DL at scale.</li>
+  <li>Researched actual technical implementations of each. For spam detection: Naive Bayes with TF-IDF feature vectors, achieving 98 percent or higher accuracy at Gmail scale. For facial recognition: CNN architectures like FaceNet, achieving 99.63 percent accuracy on the Labeled Faces in the Wild benchmark dataset.</li>
+  <li>Built a six-dimension evaluation framework covering data requirements, feature engineering, interpretability, compute needs, data type fit, and training time to compare both approaches systematically.</li>
+  <li>Documented findings in a format that mirrors the technology selection process a practitioner would follow on a real project, resulting in a reusable decision framework.</li>
+</ol>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="350">
+            <h4>Tools</h4>
+            <ul style="padding-left:1.25rem;line-height:1.9;color:var(--text-light);font-size:0.95rem;">
+  <li><strong>Structured suitability framework</strong> - used instead of a single accuracy metric because AI approach selection requires evaluating multiple trade-offs simultaneously across cost, interpretability, and data constraints.</li>
+  <li><strong>Academic papers (Sahami et al. 1998, Schroff et al. 2015)</strong> - primary sources chosen to ground analysis in peer-reviewed benchmark results, not vendor marketing claims.</li>
+  <li><strong>Industry benchmarks (LFW dataset, Gmail spam statistics)</strong> - used to anchor claims in measurable, documented outcomes that a hiring manager or evaluator can verify.</li>
+  <li><strong>Six-dimension comparison table</strong> - built to give readers a decision tool they can apply to their own problems, making the artifact practical rather than purely academic.</li>
+</ul>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="400">
             <h4>Value Proposition</h4>
             <p>Demonstrates the ability to evaluate AI approaches critically and make informed technology decisions, an essential skill for any role that involves selecting, recommending, or implementing AI solutions in enterprise environments.</p>
           </div>
 
-          <div class="info-card glass-card full-width reveal" data-delay="400">
+          <div class="info-card glass-card full-width reveal" data-delay="500">
             <h4>Unique Value</h4>
             <p>Rather than treating ML and DL as interchangeable buzzwords, this analysis shows <strong>when and why</strong> each approach is the right tool for the job. This mirrors real decisions that AI practitioners and enterprise architects face: balancing accuracy, interpretability, data requirements, and computational cost.</p>
           </div>
 
-          <div class="info-card glass-card full-width reveal" data-delay="500">
+          <div class="info-card glass-card full-width reveal" data-delay="600">
             <h4>Relevance</h4>
             <p>Connects directly to my Salesforce background, where choosing the right AI capability for each business problem is critical. Whether it's Einstein Prediction Builder (ML) or Einstein Vision (DL), understanding these trade-offs is what separates effective implementation from wasted investment.</p>
           </div>
