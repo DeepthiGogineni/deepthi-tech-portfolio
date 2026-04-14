@@ -410,6 +410,172 @@
       background: var(--gradient);
     }
 
+    /* ===== Ethics Integration Diagram ===== */
+    .ethics-diagram {
+      padding: 2.5rem;
+      margin-top: 0;
+    }
+
+    .diagram-pillars-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-bottom: 0;
+    }
+
+    .diagram-pillar-box {
+      padding: 1.25rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 2px solid transparent;
+    }
+
+    .diagram-pillar-box h5 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin: 0.5rem 0 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .diagram-pillar-box ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+
+    .diagram-pillar-box ul li {
+      font-size: 0.79rem;
+      color: var(--text-light);
+      padding: 0.2rem 0 0.2rem 1rem;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .diagram-pillar-box ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6rem;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+    }
+
+    .pillar-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: white;
+      margin: 0 auto;
+    }
+
+    .einstein-feature {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: inline-block;
+    }
+
+    .transparency-pillar { background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.25); }
+    .transparency-pillar .pillar-icon { background: #f59e0b; }
+    .transparency-pillar h5 { color: #b45309; }
+    .transparency-pillar ul li::before { background: #f59e0b; }
+    .transparency-pillar .einstein-feature { background: rgba(245,158,11,0.12); color: #b45309; }
+
+    .fairness-pillar { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.25); }
+    .fairness-pillar .pillar-icon { background: #ef4444; }
+    .fairness-pillar h5 { color: #b91c1c; }
+    .fairness-pillar ul li::before { background: #ef4444; }
+    .fairness-pillar .einstein-feature { background: rgba(239,68,68,0.12); color: #b91c1c; }
+
+    .accountability-pillar { background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.25); }
+    .accountability-pillar .pillar-icon { background: #10b981; }
+    .accountability-pillar h5 { color: #047857; }
+    .accountability-pillar ul li::before { background: #10b981; }
+    .accountability-pillar .einstein-feature { background: rgba(16,185,129,0.12); color: #047857; }
+
+    .privacy-pillar { background: rgba(37,99,235,0.06); border-color: rgba(37,99,235,0.25); }
+    .privacy-pillar .pillar-icon { background: #2563eb; }
+    .privacy-pillar h5 { color: #1d4ed8; }
+    .privacy-pillar ul li::before { background: #2563eb; }
+    .privacy-pillar .einstein-feature { background: rgba(37,99,235,0.12); color: #1d4ed8; }
+
+    .diagram-arrow-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    .diagram-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 28px;
+    }
+
+    .diagram-arrow::after {
+      content: '\2193';
+      font-size: 1.4rem;
+      color: #94a3b8;
+    }
+
+    .diagram-hub-row {
+      display: flex;
+      justify-content: center;
+    }
+
+    .einstein-hub {
+      background: var(--gradient);
+      color: white;
+      padding: 1.75rem 2.5rem;
+      border-radius: 16px;
+      text-align: center;
+      max-width: 540px;
+      width: 100%;
+    }
+
+    .einstein-hub-icon { font-size: 2rem; margin-bottom: 0.25rem; }
+
+    .einstein-hub h4 {
+      color: white;
+      font-size: 1.1rem;
+      margin: 0.4rem 0 0.5rem;
+    }
+
+    .einstein-hub p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .einstein-components {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .einstein-components span {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.76rem;
+      font-weight: 500;
+    }
+
     /* ===== Reduced Motion ===== */
     @media (prefers-reduced-motion: reduce) {
       .particle-bg .particle { animation: none; display: none; }
@@ -424,6 +590,9 @@
       .hero-stat .stat-number { font-size: 1.5rem; }
       .pillar-grid { grid-template-columns: 1fr; }
       .case-grid { grid-template-columns: 1fr; }
+      .diagram-pillars-row { grid-template-columns: 1fr 1fr; }
+      .diagram-arrow-row { grid-template-columns: 1fr 1fr; }
+      .ethics-diagram { padding: 1.5rem; }
     }
   </style>
 </head>
@@ -627,6 +796,90 @@
       </div>
     </section>
 
+    <!-- Salesforce Einstein Ethics Integration Diagram -->
+    <section class="pillar-section artifact-content reveal">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Enterprise Application</div>
+        <h2>Salesforce Einstein: Ethics in Practice</h2>
+        <p style="text-align:center;color:var(--text-light);max-width:680px;margin:0 auto 2.5rem;font-size:0.97rem;line-height:1.75;">
+          Each ethical pillar maps directly to specific Salesforce Einstein controls, showing how responsible AI principles move from theory into the platform that 150,000+ organizations use every day.
+        </p>
+
+        <div class="ethics-diagram glass-card reveal">
+
+          <div class="diagram-pillars-row">
+
+            <div class="diagram-pillar-box transparency-pillar">
+              <div class="pillar-icon" aria-hidden="true">T</div>
+              <h5>Transparency</h5>
+              <ul>
+                <li>Model cards explain prediction logic</li>
+                <li>SHAP values surface key drivers</li>
+                <li>Audit-ready documentation</li>
+              </ul>
+              <span class="einstein-feature">Einstein Prediction Builder</span>
+            </div>
+
+            <div class="diagram-pillar-box fairness-pillar">
+              <div class="pillar-icon" aria-hidden="true">F</div>
+              <h5>Fairness</h5>
+              <ul>
+                <li>Automated bias detection scans</li>
+                <li>Fairness-aware model training</li>
+                <li>Disparity reporting by segment</li>
+              </ul>
+              <span class="einstein-feature">Einstein Discovery</span>
+            </div>
+
+            <div class="diagram-pillar-box accountability-pillar">
+              <div class="pillar-icon" aria-hidden="true">A</div>
+              <h5>Accountability</h5>
+              <ul>
+                <li>Full audit trails per decision</li>
+                <li>Human-in-the-loop overrides</li>
+                <li>Role-based access controls</li>
+              </ul>
+              <span class="einstein-feature">Einstein Trust Layer</span>
+            </div>
+
+            <div class="diagram-pillar-box privacy-pillar">
+              <div class="pillar-icon" aria-hidden="true">P</div>
+              <h5>Privacy</h5>
+              <ul>
+                <li>Field-level encryption at rest</li>
+                <li>Consent management built in</li>
+                <li>GDPR and CCPA compliance</li>
+              </ul>
+              <span class="einstein-feature">Salesforce Shield</span>
+            </div>
+
+          </div>
+
+          <div class="diagram-arrow-row" aria-hidden="true">
+            <div class="diagram-arrow"></div>
+            <div class="diagram-arrow"></div>
+            <div class="diagram-arrow"></div>
+            <div class="diagram-arrow"></div>
+          </div>
+
+          <div class="diagram-hub-row">
+            <div class="einstein-hub">
+              <div class="einstein-hub-icon" aria-hidden="true">&#9889;</div>
+              <h4>Salesforce Einstein Trusted AI</h4>
+              <p>All four pillars are enforced at the platform level, so ethical controls are embedded in every AI feature deployed by enterprise teams.</p>
+              <div class="einstein-components">
+                <span>Einstein Language</span>
+                <span>Einstein Vision</span>
+                <span>Einstein Copilot</span>
+                <span>MuleSoft AI</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- Conclusion -->
     <section class="pillar-section artifact-content reveal">
       <div class="container">
@@ -657,12 +910,12 @@
 
           <div class="info-card glass-card reveal" data-delay="300">
             <h4>Feedback Received</h4>
-            <p>Peers suggested adding more real-world examples to make ethical concepts feel practical rather than theoretical. They also recommended connecting each pillar to specific industries where the impact is most visible.</p>
+            <p>Bindu Bhargava Reddy Chintam suggested adding a visual diagram showing how the ethics pillars connect to actual Salesforce Einstein and MuleSoft features, noting that the pillar descriptions were strong in theory but did not make the enterprise application visible. Other peers recommended more real-world examples and clearer connections between each pillar and the industries most affected.</p>
           </div>
 
           <div class="info-card glass-card full-width reveal" data-delay="400">
             <h4>Revisions Applied</h4>
-            <p>Based on the feedback, I added case studies from healthcare, finance, and enterprise platforms to ground each ethical pillar in real incidents. The four-pillar structure was refined to give each challenge its own distinct focus rather than grouping them together.</p>
+            <p>In response to Bindu's feedback, I added the "Salesforce Einstein: Ethics in Practice" integration diagram mapping each pillar directly to Einstein controls: Prediction Builder for transparency, Discovery for fairness, Trust Layer for accountability, and Salesforce Shield for privacy. Case studies from healthcare, finance, and enterprise platforms were also added to ground each pillar in real documented incidents.</p>
           </div>
 
         </div>
