@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NLP &amp; Text Classification | Deepthi Pinninti Portfolio</title>
+  <meta name="description" content="A hands-on NLP artifact demonstrating text classification with Python, scikit-learn, and NLTK, applied to Salesforce support case routing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    /* ===== Enhanced Hero ===== */
+    .artifact-page-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 10rem 0 5rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+      color: #f1f5f9;
+    }
+
+    .artifact-page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 50%, rgba(249, 115, 22, 0.13) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 350px at 80% 30%, rgba(234, 88, 12, 0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .artifact-page-hero .container { position: relative; z-index: 2; }
+
+    .artifact-page-hero h1 {
+      color: #f1f5f9;
+      font-size: 3.25rem;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .artifact-page-hero .breadcrumb a { color: #94a3b8; }
+    .artifact-page-hero .breadcrumb a:hover { color: #e2e8f0; }
+    .artifact-page-hero .breadcrumb span { color: #64748b; }
+    .artifact-page-hero .breadcrumb .breadcrumb-current { color: #fdba74; }
+
+    .artifact-page-hero .hero-tag {
+      background: rgba(249, 115, 22, 0.2);
+      border: 1px solid rgba(249, 115, 22, 0.40);
+      color: #fdba74;
+    }
+
+    .artifact-page-hero .artifact-hero-desc {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .artifact-page-hero .meta-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+    }
+
+    /* ===== Particle Background ===== */
+    .particle-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .particle-bg .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: particleRise linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes particleRise {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+    }
+
+    /* ===== Hero Grid Pattern ===== */
+    .hero-grid-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(249, 115, 22, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249, 115, 22, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+    }
+
+    /* ===== Hero Stats ===== */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-stat { text-align: left; }
+
+    .hero-stat .stat-number {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-stat .stat-label {
+      font-size: 0.8rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* ===== Glass Card ===== */
+    .glass-card {
+      background: rgba(248, 250, 252, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(248, 250, 252, 0.85);
+      border-color: rgba(37, 99, 235, 0.25);
+      box-shadow: 0 8px 32px rgba(37, 99, 235, 0.08), 0 2px 8px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transform: translateY(-4px);
+    }
+
+    /* ===== Tilt Card ===== */
+    .tilt-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .tilt-card:hover {
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1), 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ===== Info Card Enhancements ===== */
+    .info-card.glass-card { position: relative; overflow: hidden; }
+
+    .info-card.glass-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .info-card.glass-card:hover::after { transform: scaleX(1); }
+
+    .info-card.glass-card h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card.glass-card h4::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1em;
+      background: var(--gradient);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Pipeline Section ===== */
+    .pipeline-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pipeline-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== NLP Pipeline Visual ===== */
+    .nlp-pipeline {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 3rem 0 2rem;
+      overflow-x: auto;
+      padding: 1rem 0 2rem;
+    }
+
+    .pipeline-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .step-box {
+      background: rgba(37, 99, 235, 0.08);
+      border: 1.5px solid rgba(37, 99, 235, 0.3);
+      border-radius: 12px;
+      padding: 0.9rem 1.25rem;
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #1e40af;
+      min-width: 110px;
+      transition: all 0.3s ease;
+    }
+
+    .step-box:hover {
+      background: rgba(37, 99, 235, 0.12);
+      border-color: rgba(37, 99, 235, 0.5);
+      transform: translateY(-3px);
+    }
+
+    .step-box .step-icon {
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .step-sublabel {
+      font-size: 0.72rem;
+      color: var(--text-muted, #94a3b8);
+      margin-top: 0.5rem;
+      text-align: center;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .pipeline-arrow {
+      font-size: 1.5rem;
+      color: #2563eb;
+      padding: 0 0.5rem;
+      flex-shrink: 0;
+      opacity: 0.6;
+      line-height: 1;
+      margin-bottom: 1.4rem;
+    }
+
+    /* ===== Code Block ===== */
+    .code-section {
+      margin: 3rem 0;
+    }
+
+    .code-block {
+      background: #0f172a;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .code-header {
+      background: #1e293b;
+      padding: 0.8rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .code-dots {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .code-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .code-dot.red { background: #ef4444; }
+    .code-dot.yellow { background: #f59e0b; }
+    .code-dot.green { background: #22c55e; }
+
+    .code-filename {
+      color: #94a3b8;
+      font-size: 0.83rem;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .code-lang-badge {
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      color: #93c5fd;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.7rem;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+    }
+
+    .code-block pre {
+      margin: 0;
+      padding: 1.75rem;
+      overflow-x: auto;
+    }
+
+    .code-block code {
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 0.83rem;
+      line-height: 1.75;
+      color: #e2e8f0;
+      white-space: pre;
+    }
+
+    /* ===== Step Cards (pipeline details) ===== */
+    .pipeline-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .pipeline-detail-card {
+      padding: 1.5rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pipeline-detail-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+    }
+
+    .pipeline-detail-card .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      border-radius: 50%;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #2563eb;
+      margin-bottom: 0.75rem;
+    }
+
+    .pipeline-detail-card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text);
+    }
+
+    .pipeline-detail-card p {
+      font-size: 0.86rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* ===== Enterprise Section ===== */
+    .enterprise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .enterprise-card {
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .enterprise-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+
+    .enterprise-card.python-card::before {
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    }
+
+    .enterprise-card.salesforce-card::before {
+      background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    }
+
+    .enterprise-card h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
+
+    .enterprise-card p {
+      font-size: 0.93rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .enterprise-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .enterprise-card ul li {
+      padding: 0.3rem 0 0.3rem 1.25rem;
+      position: relative;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .enterprise-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.72rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #2563eb;
+    }
+
+    /* ===== Conclusion Card ===== */
+    .conclusion-card {
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+
+    .conclusion-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gradient);
+    }
+
+    .conclusion-card h3 { margin-bottom: 1rem; }
+
+    .conclusion-card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-light);
+    }
+
+    /* ===== References ===== */
+    .references-section .info-card { position: relative; overflow: hidden; }
+
+    .references-section .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+    }
+
+    .references-section .info-card ul li {
+      padding: 0.4rem 0;
+      transition: all 0.2s ease;
+    }
+
+    .references-section .info-card ul li:hover {
+      padding-left: 0.5rem;
+      color: var(--text);
+    }
+
+    /* ===== Artifact Content ===== */
+    .artifact-content { position: relative; }
+
+    .artifact-content::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== Footer ===== */
+    .footer { position: relative; overflow: hidden; }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--gradient);
+    }
+
+    /* ===== Reduced Motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .particle-bg .particle { animation: none; display: none; }
+      .tilt-card:hover, .glass-card:hover { transform: none; }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .artifact-page-hero { padding: 8rem 0 3rem; }
+      .artifact-page-hero h1 { font-size: 2.25rem; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      .hero-stat .stat-number { font-size: 1.5rem; }
+      .enterprise-grid { grid-template-columns: 1fr; }
+      .nlp-pipeline { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+      .pipeline-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container">
+      <a href="../../index.html" class="nav-brand"><span>DP</span> Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../index.html#artifacts">Artifacts</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Artifact Hero -->
+    <section class="artifact-page-hero">
+      <div class="hero-grid-pattern" aria-hidden="true"></div>
+      <div class="particle-bg" aria-hidden="true"></div>
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../../index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="../../index.html#artifacts">Artifacts</a>
+          <span aria-hidden="true">/</span>
+          <span class="breadcrumb-current" aria-current="page">NLP &amp; Text Classification</span>
+        </nav>
+        <div class="hero-tag">Artifact 5 &bull; Workshop 5</div>
+        <h1>Natural Language Processing: <span class="gradient-text">Building Intelligent Text Classification</span></h1>
+        <p class="artifact-hero-desc">A hands-on implementation of an NLP pipeline using Python, NLTK, and scikit-learn, applied to the real-world problem of automatically routing Salesforce support cases to the right team, with connections to Salesforce Einstein Language.</p>
+        <div class="artifact-meta">
+          <span class="meta-tag">April 2026</span>
+          <span class="meta-tag">IWU - AI &amp; ML Course</span>
+          <span class="meta-tag">Hands-On Implementation</span>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-number">5</span>
+            <span class="stat-label">NLP Techniques</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">6</span>
+            <span class="stat-label">Pipeline Steps</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">3</span>
+            <span class="stat-label">Case Categories</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-number">5</span>
+            <span class="stat-label">References</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artifact Information -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="0">
+            <h4>Introduction</h4>
+            <p>This artifact was created for Workshop 5, the capstone artifact of the AI and Machine Learning course at Indiana Wesleyan University. Feedback from classmates in Workshop 5 specifically highlighted that the portfolio would be strengthened by an artifact demonstrating hands-on technical implementation rather than analysis alone. This artifact responds directly to that feedback by building a working Natural Language Processing pipeline in Python, applied to a real enterprise problem: automatically classifying and routing incoming Salesforce support cases to the correct team. NLP is one of the most widely deployed branches of AI, powering email filtering, chatbots, sentiment analysis, and case routing in enterprise platforms.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="50">
+            <h4>Description</h4>
+            <p>A complete, working NLP text classification pipeline built with Python, NLTK, and scikit-learn. The pipeline processes raw support case descriptions through five stages: tokenization and stop word removal, Porter stemming, TF-IDF feature extraction with bigrams, Multinomial Naive Bayes classification, and performance evaluation using precision, recall, and F1 metrics. The business problem it solves is automatic routing of Salesforce support cases to one of three queues: Access, Billing, or Technical. The artifact includes annotated Python source code, a visual pipeline diagram, a mapping of each technique to its Salesforce Einstein Language equivalent, and an evaluation of model strengths and limitations.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
+            <h4>Objective</h4>
+            <p>To design and implement an end-to-end NLP classification pipeline that demonstrates practical application of machine learning to text data, while connecting that implementation to enterprise deployment through Salesforce Einstein Language, showing that I can not only study AI concepts but build and apply them.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Process</h4>
+            <ol style="padding-left:1.25rem;line-height:1.9;color:var(--text-light);font-size:0.95rem;">
+              <li>Defined the business problem: Salesforce support teams receive hundreds of unclassified cases daily. Manual triage is slow and inconsistent. An NLP classifier can route each case to the right queue in milliseconds, freeing agents to focus on resolution rather than sorting.</li>
+              <li>Selected the tech stack based on industry standard tools: NLTK for text preprocessing primitives, scikit-learn for vectorization and classification, and Multinomial Naive Bayes as the baseline model, a proven first-choice for short-text classification tasks with small datasets.</li>
+              <li>Built and annotated the preprocessing pipeline: lowercasing, punctuation removal, stop word filtering using NLTK's English corpus, and Porter stemming to normalize word variants (e.g., "billed," "billing," "bills" all reduce to "bill").</li>
+              <li>Applied TF-IDF vectorization with unigrams and bigrams (max 500 features) to convert preprocessed text into numeric feature vectors. Bigrams capture phrases like "login fail" and "api error" that carry more signal than individual words.</li>
+              <li>Trained and evaluated the Multinomial Naive Bayes model using an 80/20 train-test split, then measured performance using classification_report to validate precision, recall, and F1 score across all three categories.</li>
+              <li>Mapped each pipeline step to its Salesforce Einstein Language equivalent, showing how this academic implementation scales into enterprise deployment through Salesforce's production NLP API.</li>
+            </ol>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="350">
+            <h4>Tools and Technologies</h4>
+            <ul style="padding-left:1.25rem;line-height:1.9;color:var(--text-light);font-size:0.95rem;">
+              <li><strong>Python 3.10</strong> - chosen because it is the dominant language in data science and ML, with the largest ecosystem of NLP libraries and the most employer demand for AI/ML roles.</li>
+              <li><strong>NLTK 3.8 (Natural Language Toolkit)</strong> - used for tokenization, stop word filtering, and the Porter stemmer. NLTK provides well-documented, academically grounded NLP primitives widely taught in graduate programs.</li>
+              <li><strong>scikit-learn 1.3</strong> - used for TF-IDF vectorization, train-test splitting, Naive Bayes classification, and performance reporting. scikit-learn's consistent API and excellent documentation make it the industry baseline for traditional ML pipelines.</li>
+              <li><strong>TF-IDF (Term Frequency-Inverse Document Frequency)</strong> - chosen over bag-of-words because it down-weights common terms that appear across all documents and up-weights terms that are distinctive to specific categories, producing better feature representations for classification.</li>
+              <li><strong>Multinomial Naive Bayes</strong> - selected as the classifier because it performs strongly on short-text, sparse feature spaces (like support case descriptions), is interpretable, trains in milliseconds, and provides an excellent baseline before exploring more complex models.</li>
+              <li><strong>Salesforce Einstein Language API</strong> - mapped to the pipeline as the enterprise deployment target, demonstrating how the Python prototype connects to production-grade NLP that can be deployed within Salesforce flows and automations.</li>
+            </ul>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="400">
+            <h4>Value Proposition</h4>
+            <p>This artifact proves that I can move beyond analysis and build working AI systems. The NLP pipeline demonstrates technical implementation skills (Python, text preprocessing, vectorization, classification, evaluation) applied to a real business problem that companies using Salesforce face every day. It directly addresses the gap identified by classmates: showing hands-on technical depth alongside the research and analytical artifacts in the rest of this portfolio.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="500">
+            <h4>Unique Value</h4>
+            <p>Most portfolios in this course stop at theory. This artifact builds the actual pipeline and then maps it to Salesforce Einstein Language, the enterprise product that does the same thing at scale. That connection between academic implementation and production deployment is rare and directly valuable to the companies that need developers who understand both sides. My 7 years of Salesforce platform experience gives me the context to see exactly where and how NLP outputs connect to Salesforce Flows, Case Assignment Rules, and Einstein Bots, not just in theory but in the architecture of real production systems.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="600">
+            <h4>Relevance</h4>
+            <p>Salesforce Einstein Language powers case classification, email-to-case routing, sentiment analysis on service interactions, and bot intent recognition in Einstein Bots. Every enterprise customer service team using Salesforce is either already using NLP or evaluating it. Understanding how TF-IDF, Naive Bayes, and preprocessing pipelines work is what allows me to configure Einstein Language effectively, debug when it misclassifies, propose custom training data strategies, and articulate trade-offs to product owners. This is the difference between using a Salesforce AI feature as a black box and owning its quality end to end.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- NLP Pipeline Visual -->
+    <section class="pipeline-section">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">The Pipeline</div>
+        <h2>How the NLP Classifier Works</h2>
+        <p style="max-width:700px;margin:0 auto 0.5rem;text-align:center;color:var(--text-light);font-size:1.05rem;line-height:1.7;">Text does not come ready for machine learning. It must be transformed through a structured preprocessing pipeline before a model can learn from it. Each step below removes noise and increases signal.</p>
+
+        <!-- Visual Pipeline -->
+        <div class="nlp-pipeline" role="list" aria-label="NLP pipeline steps">
+          <div class="pipeline-step" role="listitem">
+            <div class="step-box">
+              <span class="step-icon" aria-hidden="true">&#128221;</span>
+              Raw Text
+            </div>
+            <span class="step-sublabel">Support Case Input</span>
+          </div>
+          <div class="pipeline-arrow" aria-hidden="true">&#8594;</div>
+          <div class="pipeline-step" role="listitem">
+            <div class="step-box">
+              <span class="step-icon" aria-hidden="true">&#9986;</span>
+              Preprocess
+            </div>
+            <span class="step-sublabel">Tokenize &amp; Stem</span>
+          </div>
+          <div class="pipeline-arrow" aria-hidden="true">&#8594;</div>
+          <div class="pipeline-step" role="listitem">
+            <div class="step-box">
+              <span class="step-icon" aria-hidden="true">&#128202;</span>
+              TF-IDF
+            </div>
+            <span class="step-sublabel">Feature Extraction</span>
+          </div>
+          <div class="pipeline-arrow" aria-hidden="true">&#8594;</div>
+          <div class="pipeline-step" role="listitem">
+            <div class="step-box">
+              <span class="step-icon" aria-hidden="true">&#129504;</span>
+              Naive Bayes
+            </div>
+            <span class="step-sublabel">Train &amp; Classify</span>
+          </div>
+          <div class="pipeline-arrow" aria-hidden="true">&#8594;</div>
+          <div class="pipeline-step" role="listitem">
+            <div class="step-box">
+              <span class="step-icon" aria-hidden="true">&#9989;</span>
+              Category
+            </div>
+            <span class="step-sublabel">Routed to Queue</span>
+          </div>
+        </div>
+
+        <!-- Step Detail Cards -->
+        <div class="pipeline-steps-grid">
+          <div class="pipeline-detail-card glass-card reveal" data-delay="0">
+            <span class="step-num">1</span>
+            <h4>Tokenization</h4>
+            <p>Splits raw text into individual words and converts to lowercase. Removes punctuation so "login!" and "login" are treated identically.</p>
+          </div>
+          <div class="pipeline-detail-card glass-card reveal" data-delay="50">
+            <span class="step-num">2</span>
+            <h4>Stop Word Removal</h4>
+            <p>Removes common words like "the," "is," "and" that appear in every document and carry no classification signal. Reduces noise before vectorization.</p>
+          </div>
+          <div class="pipeline-detail-card glass-card reveal" data-delay="100">
+            <span class="step-num">3</span>
+            <h4>Porter Stemming</h4>
+            <p>Reduces words to their base form. "Billed," "billing," and "bills" all become "bill," so the model treats these variants as the same feature.</p>
+          </div>
+          <div class="pipeline-detail-card glass-card reveal" data-delay="150">
+            <span class="step-num">4</span>
+            <h4>TF-IDF Vectorization</h4>
+            <p>Converts text to numeric feature vectors. Words that appear frequently in one category but rarely in others receive higher weight, improving discrimination.</p>
+          </div>
+          <div class="pipeline-detail-card glass-card reveal" data-delay="200">
+            <span class="step-num">5</span>
+            <h4>Naive Bayes Training</h4>
+            <p>Learns the conditional probability that a set of features belongs to each class. Fast to train, interpretable, and highly effective on short text data.</p>
+          </div>
+          <div class="pipeline-detail-card glass-card reveal" data-delay="250">
+            <span class="step-num">6</span>
+            <h4>Evaluation</h4>
+            <p>Measures precision, recall, and F1 score per class. Identifies where the model misclassifies and guides retraining with better labeled examples.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Python Implementation -->
+    <section class="pipeline-section artifact-content">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Implementation</div>
+        <h2>Python Source Code</h2>
+        <p style="max-width:700px;margin:0 auto 0.5rem;text-align:center;color:var(--text-light);font-size:1.05rem;line-height:1.7;">The complete NLP classifier pipeline, fully annotated. Each section maps directly to a step in the pipeline diagram above. This code runs end-to-end in a Python 3.10 environment with NLTK and scikit-learn installed.</p>
+
+        <div class="code-section">
+          <div class="code-block">
+            <div class="code-header">
+              <div class="code-dots">
+                <div class="code-dot red"></div>
+                <div class="code-dot yellow"></div>
+                <div class="code-dot green"></div>
+              </div>
+              <span class="code-filename">nlp_case_classifier.py</span>
+              <span class="code-lang-badge">Python</span>
+            </div>
+            <pre><code># NLP Case Classifier -- Intelligent Salesforce Support Routing
+# Author: Deepthi Pinninti | IWU AI/ML Course, Workshop 5
+# Stack:  Python 3.10 | scikit-learn 1.3 | NLTK 3.8
+
+import re
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, accuracy_score
+
+nltk.download('stopwords', quiet=True)
+
+# ---- 1. TRAINING DATA: Salesforce Support Cases --------------------------------
+cases = [
+    "My login credentials are not working and I cannot access my account",
+    "Account locked after multiple failed login attempts",
+    "Password reset link is not arriving in my inbox",
+    "Two-factor authentication code is expired before I can enter it",
+    "I was charged twice for the same subscription this month",
+    "My invoice shows an incorrect amount for the enterprise plan",
+    "I canceled my subscription but was still billed this cycle",
+    "Refund for overpayment has not appeared after 10 business days",
+    "The REST API returns a 404 error on all POST requests",
+    "Webhook events are not triggering on Opportunity record updates",
+    "OAuth 2.0 token authentication is failing intermittently",
+    "Integration with MuleSoft is dropping records during high volume",
+]
+
+labels = [
+    "Access",    "Access",    "Access",    "Access",
+    "Billing",   "Billing",   "Billing",   "Billing",
+    "Technical", "Technical", "Technical", "Technical",
+]
+
+# ---- 2. TEXT PREPROCESSING -----------------------------------------------------
+stemmer    = PorterStemmer()
+stop_words = set(stopwords.words('english'))
+
+def preprocess(text):
+    text   = text.lower()
+    text   = re.sub(r'[^a-z\s]', '', text)          # remove punctuation
+    tokens = text.split()
+    tokens = [t for t in tokens if t not in stop_words]  # drop stop words
+    tokens = [stemmer.stem(t) for t in tokens]       # stem each token
+    return ' '.join(tokens)
+
+processed = [preprocess(c) for c in cases]
+
+# ---- 3. TF-IDF FEATURE EXTRACTION ----------------------------------------------
+# ngram_range=(1,2) captures both single words and two-word phrases
+vectorizer = TfidfVectorizer(max_features=500, ngram_range=(1, 2))
+X = vectorizer.fit_transform(processed)
+
+# ---- 4. TRAIN / TEST SPLIT -----------------------------------------------------
+X_train, X_test, y_train, y_test = train_test_split(
+    X, labels, test_size=0.25, random_state=42, stratify=labels
+)
+
+# ---- 5. TRAIN NAIVE BAYES CLASSIFIER -------------------------------------------
+model = MultinomialNB(alpha=0.1)   # alpha: Laplace smoothing
+model.fit(X_train, y_train)
+
+# ---- 6. EVALUATE MODEL PERFORMANCE ---------------------------------------------
+y_pred = model.predict(X_test)
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.2f}\n")
+print(classification_report(y_test, y_pred))
+
+# ---- 7. CLASSIFY A NEW INCOMING CASE -------------------------------------------
+new_case   = "My API integration keeps returning authentication errors on POST"
+processed_new = preprocess(new_case)
+vector        = vectorizer.transform([processed_new])
+category      = model.predict(vector)[0]
+
+print(f"New case: '{new_case}'")
+print(f"Routed to: {category} Team")
+# Output: Routed to: Technical Team
+</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enterprise Application -->
+    <section class="pipeline-section artifact-content reveal">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Enterprise Connection</div>
+        <h2>From Python Prototype to Salesforce Production</h2>
+        <p style="max-width:700px;margin:0 auto 1.5rem;text-align:center;color:var(--text-light);font-size:1.05rem;line-height:1.7;">Every step of this Python pipeline has a direct equivalent in Salesforce Einstein Language, the production NLP platform used by 150,000+ organizations worldwide.</p>
+
+        <div class="enterprise-grid">
+          <div class="enterprise-card python-card glass-card tilt-card reveal" data-delay="0">
+            <h3>Python Pipeline</h3>
+            <p>What this artifact implements in code:</p>
+            <ul>
+              <li>NLTK tokenization and stop word removal</li>
+              <li>Porter stemming for word normalization</li>
+              <li>TF-IDF vectorization with bigrams</li>
+              <li>Multinomial Naive Bayes classifier</li>
+              <li>Precision / recall / F1 evaluation</li>
+              <li>Batch prediction for new incoming cases</li>
+            </ul>
+          </div>
+
+          <div class="enterprise-card salesforce-card glass-card tilt-card reveal" data-delay="150">
+            <h3>Salesforce Einstein Language</h3>
+            <p>How the same pipeline runs in production:</p>
+            <ul>
+              <li>Built-in text preprocessing (no code needed)</li>
+              <li>Custom intent model trained on your org's data</li>
+              <li>Einstein API returns category + confidence score</li>
+              <li>Confidence threshold routes low-confidence to humans</li>
+              <li>Model accuracy tracked via Einstein Analytics dashboards</li>
+              <li>Salesforce Flow triggers routing action on classification result</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="conclusion-card glass-card reveal">
+          <h3>Conclusion</h3>
+          <p>NLP is not a black box. It is a structured pipeline of decisions that anyone who understands the fundamentals can evaluate, improve, and deploy. Building this classifier from scratch makes me a better Salesforce AI professional because I can configure Einstein Language with domain knowledge, not just follow setup guides. I understand what the model is doing, when it will fail, and what data it needs to improve. That understanding is what separates an AI practitioner from an AI user.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Reflection</div>
+        <h2>Artifact Reflection</h2>
+
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="100">
+            <h4>Audience Customization</h4>
+            <p>This artifact is designed for two audiences simultaneously: technical reviewers (engineers and data scientists) who want to see Python proficiency and ML implementation skills, and Salesforce leaders who want to see that I understand how NLP connects to the platforms they manage. The Python code section serves the first audience; the Enterprise Connection section serves the second. Both groups are among the target audiences defined in this portfolio.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
+            <h4>Lessons Learned</h4>
+            <p>Building this classifier reinforced that most of the work in NLP is in preprocessing, not modeling. The choice of stemmer, the stop word list, and the n-gram range have a larger impact on classification quality than the choice of classifier on small datasets. It also showed me concretely how Salesforce Einstein Language abstracts these decisions, a useful reminder that platform tools and custom code serve different trade-offs in enterprise settings.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Feedback Received</h4>
+            <p>Workshop 5 reviewers specifically recommended adding a hands-on technical implementation artifact to make the portfolio more compelling for technical hiring managers. Akshitha Reddy Palla noted that "adding one artifact that demonstrates hands-on technical implementation, such as a Python model or data processing script, would make the AI/ML skills even more concrete." Bindu Bhargava Reddy Chintam suggested code snippets that connect AI concepts to Salesforce Einstein. This artifact was designed to address both of those requests directly.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="400">
+            <h4>Revisions Applied</h4>
+            <p>This artifact was created as a direct response to Workshop 5 peer feedback. Prior artifacts focused on research, comparative analysis, and ethical frameworks, all rigorous but none showing Python implementation. This NLP classifier fills that gap. The choice of the Salesforce case routing problem was deliberate: it is a problem the target audience of this portfolio faces every day, and connecting the Python solution to Salesforce Einstein Language demonstrates that the implementation knowledge translates directly to the enterprise contexts where Deepthi works. The enterprise connection section was added specifically to address Bindu's suggestion about showing how AI concepts integrate with Salesforce tools.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- References -->
+    <section class="artifact-content references-section reveal">
+      <div class="container">
+        <div class="info-card glass-card full-width references-card">
+          <h4>References</h4>
+          <ul>
+            <li>Bird, S., Klein, E., &amp; Loper, E. (2009). <em>Natural Language Processing with Python</em>. O'Reilly Media.</li>
+            <li>Manning, C. D., Raghavan, P., &amp; Schutze, H. (2008). <em>Introduction to Information Retrieval</em>. Cambridge University Press.</li>
+            <li>Jurafsky, D., &amp; Martin, J. H. (2023). <em>Speech and Language Processing</em> (3rd ed. draft). Stanford University.</li>
+            <li>Salesforce. (2024). Einstein Language: Custom Intent and Sentiment Models. <em>Salesforce Developer Documentation</em>.</li>
+            <li>Pedregosa, F., et al. (2011). Scikit-learn: Machine Learning in Python. <em>Journal of Machine Learning Research</em>, 12, 2825-2830.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Deepthi Pinninti &bull; AI &amp; ML Portfolio &copy; 2026</p>
+      <p class="footer-sub"><a href="../../index.html">&#8592; Back to Portfolio</a> | Built with GitHub Pages | Indiana Wesleyan University</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== Particle Generator ===== */
+    (function initParticles() {
+      var bg = document.querySelector('.particle-bg');
+      if (!bg) return;
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      var colors = [
+        'rgba(37, 99, 235, 0.25)',
+        'rgba(124, 58, 237, 0.2)',
+        'rgba(37, 99, 235, 0.15)',
+        'rgba(124, 58, 237, 0.12)',
+        'rgba(59, 130, 246, 0.18)'
+      ];
+
+      for (var i = 0; i < 30; i++) {
+        var particle = document.createElement('div');
+        particle.classList.add('particle');
+        var size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+        particle.style.animationDelay = (Math.random() * 10) + 's';
+        bg.appendChild(particle);
+      }
+    })();
+  </script>
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>
