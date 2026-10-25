@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ML Algorithm Map | Deepthi Pinninti Portfolio</title>
+  <meta name="description" content="A visual framework of 15 machine learning algorithms sorted by learning type and application domain: tabular data, computer vision, natural language, and generative AI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    /* ===== Enhanced Hero ===== */
+    .artifact-page-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 10rem 0 5rem;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%);
+      color: #f1f5f9;
+    }
+
+    .artifact-page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 350px at 80% 30%, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .artifact-page-hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .artifact-page-hero h1 {
+      color: #f1f5f9;
+      font-size: 3.25rem;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .artifact-page-hero .breadcrumb a {
+      color: #94a3b8;
+    }
+
+    .artifact-page-hero .breadcrumb a:hover {
+      color: #e2e8f0;
+    }
+
+    .artifact-page-hero .breadcrumb span {
+      color: #64748b;
+    }
+
+    .artifact-page-hero .breadcrumb .breadcrumb-current {
+      color: #93c5fd;
+    }
+
+    .artifact-page-hero .hero-tag {
+      background: rgba(124, 58, 237, 0.2);
+      border: 1px solid rgba(124, 58, 237, 0.35);
+      color: #c4b5fd;
+    }
+
+    .artifact-page-hero .artifact-hero-desc {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .artifact-page-hero .meta-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #94a3b8;
+    }
+
+    /* ===== Particle Background ===== */
+    .particle-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .particle-bg .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: particleRise linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes particleRise {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% {
+        transform: translateY(-20vh) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* ===== Hero Grid Pattern ===== */
+    .hero-grid-pattern {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(124, 58, 237, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 58, 237, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 80%);
+    }
+
+    /* ===== Hero Stats Bar ===== */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-stat {
+      text-align: left;
+    }
+
+    .hero-stat .stat-number {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero-stat .stat-label {
+      font-size: 0.8rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    /* ===== Glass Card ===== */
+    .glass-card {
+      background: rgba(248, 250, 252, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(248, 250, 252, 0.85);
+      border-color: rgba(37, 99, 235, 0.25);
+      box-shadow:
+        0 8px 32px rgba(37, 99, 235, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transform: translateY(-4px);
+    }
+
+    /* ===== Tilt Card ===== */
+    .tilt-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .tilt-card:hover {
+      box-shadow:
+        0 20px 40px rgba(37, 99, 235, 0.1),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ===== Info Card Enhancements ===== */
+    .info-card.glass-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card.glass-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .info-card.glass-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .info-card.glass-card h4 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-card.glass-card h4::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1em;
+      background: var(--gradient);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Enhanced Artifact Content ===== */
+    .artifact-content {
+      position: relative;
+    }
+
+    .artifact-content::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== Comparison Section ===== */
+    .comparison-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .comparison-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Intro cards: ML vs DL */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .intro-card {
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .intro-card.ml-card::before {
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+    }
+
+    .intro-card.dl-card::before {
+      background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    }
+
+    .intro-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .intro-card .accent-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .ml-card .accent-label {
+      background: rgba(37, 99, 235, 0.1);
+      color: #2563eb;
+    }
+
+    .dl-card .accent-label {
+      background: rgba(124, 58, 237, 0.1);
+      color: #7c3aed;
+    }
+
+    .intro-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .intro-card ul li {
+      padding: 0.35rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    .intro-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.75rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .ml-card ul li::before {
+      background: #2563eb;
+    }
+
+    .dl-card ul li::before {
+      background: #7c3aed;
+    }
+
+    /* ===== Case Study Cards ===== */
+    .case-study {
+      margin-top: 4rem;
+    }
+
+    .case-study-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .case-study-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .case-study.ml-case .case-study-number {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+    }
+
+    .case-study.dl-case .case-study-number {
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    }
+
+    .case-study-header h3 {
+      font-size: 1.5rem;
+    }
+
+    .case-study-header .case-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+    }
+
+    .case-study.ml-case .case-label {
+      color: #2563eb;
+    }
+
+    .case-study.dl-case .case-label {
+      color: #7c3aed;
+    }
+
+    .case-study-body {
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .case-study-body > p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+    }
+
+    .suitability-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .suit-card {
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .suit-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .suit-card h4 .icon {
+      font-size: 1.1rem;
+    }
+
+    .suit-card.suits h4 .icon {
+      color: var(--success);
+    }
+
+    .suit-card.doesnt h4 .icon {
+      color: #ef4444;
+    }
+
+    .suit-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .suit-card ul li {
+      padding: 0.3rem 0;
+      padding-left: 1rem;
+      position: relative;
+      color: var(--text-light);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .suit-card.suits ul li::before {
+      content: '+';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: var(--success);
+    }
+
+    .suit-card.doesnt ul li::before {
+      content: '\2013';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: #ef4444;
+    }
+
+    /* ===== Key Differences Section ===== */
+    .differences-section {
+      position: relative;
+    }
+
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .diff-card {
+      padding: 1.75rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .diff-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+
+    .diff-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .diff-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      min-width: 32px;
+      padding-top: 0.15rem;
+    }
+
+    .diff-label.ml {
+      color: #2563eb;
+    }
+
+    .diff-label.dl {
+      color: #7c3aed;
+    }
+
+    .diff-value {
+      font-size: 0.93rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* ===== Conclusion ===== */
+    .conclusion-card {
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      margin-top: 2.5rem;
+    }
+
+    .conclusion-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient);
+    }
+
+    .conclusion-card h3 {
+      margin-bottom: 1rem;
+    }
+
+    .conclusion-card p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-light);
+    }
+
+    /* ===== References ===== */
+    .references-section .info-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .references-section .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient);
+    }
+
+    .references-section .info-card ul li {
+      padding: 0.4rem 0;
+      transition: all 0.2s ease;
+    }
+
+    .references-section .info-card ul li:hover {
+      padding-left: 0.5rem;
+      color: var(--text);
+    }
+
+    /* ===== Enhanced Footer ===== */
+    .footer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gradient);
+    }
+
+    /* ===== Reduced Motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .particle-bg .particle {
+        animation: none;
+        display: none;
+      }
+
+      .tilt-card:hover,
+      .glass-card:hover {
+        transform: none;
+      }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .artifact-page-hero {
+        padding: 8rem 0 3rem;
+      }
+
+      .artifact-page-hero h1 {
+        font-size: 2.25rem;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-stat .stat-number {
+        font-size: 1.5rem;
+      }
+
+      .intro-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .suitability-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .diff-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  
+    /* ===== Artifact 6: infographic and algorithm table ===== */
+    .map-figure { padding: 1rem; }
+    .map-scroll { overflow-x: auto; border-radius: 12px; }
+    .map-scroll img { display: block; width: 100%; min-width: 900px; height: auto; border-radius: 10px; background: #f4f7fb; }
+    .map-caption { margin-top: 0.75rem; font-size: 0.9rem; color: var(--text-light); }
+    .map-caption a { color: var(--primary, #2563eb); font-weight: 600; }
+    .algo-table-wrap { overflow-x: auto; margin-top: 1.5rem; border-radius: 12px; }
+    .algo-table { width: 100%; min-width: 820px; border-collapse: collapse; font-size: 0.92rem; background: rgba(255,255,255,0.7); }
+    .algo-table th, .algo-table td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid rgba(148,163,184,0.35); vertical-align: top; color: var(--text-light); }
+    .algo-table thead th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(37,99,235,0.08); color: #1e293b; }
+    .algo-table tbody th { color: #0f172a; font-weight: 600; }
+    .learn-badge { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+    .learn-sup { background: #0f172a; color: #fff; }
+    .learn-self { background: #dde4f0; color: #0f172a; border: 1.5px solid #0f172a; }
+    .learn-uns { background: #fff; color: #5b45a8; border: 1.5px solid #5b45a8; }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container">
+      <a href="../../index.html" class="nav-brand"><span>DP</span> Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../index.html#artifacts">Artifacts</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Artifact Hero -->
+    <section class="artifact-page-hero">
+      <div class="hero-grid-pattern" aria-hidden="true"></div>
+      <div class="particle-bg" aria-hidden="true"></div>
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="../../index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="../../index.html#artifacts">Artifacts</a>
+          <span aria-hidden="true">/</span>
+          <span class="breadcrumb-current" aria-current="page">ML Algorithm Map</span>
+        </nav>
+        <div class="hero-tag">Artifact 6 &bull; Workshop 1.5</div>
+        <h1>The Machine Learning <span class="gradient-text">Algorithm Map</span></h1>
+        <p class="artifact-hero-desc">A visual framework that sorts 15 machine learning algorithms by how they learn and by the kind of data they work on: tabular data, computer vision, natural language, and generative AI.</p>
+        <div class="artifact-meta">
+          <span class="meta-tag">October 2026</span>
+          <span class="meta-tag">IWU - AIML Course</span>
+          <span class="meta-tag">Visual Framework</span>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="stat-number">15</span><span class="stat-label">Algorithms</span></div>
+          <div class="hero-stat"><span class="stat-number">4</span><span class="stat-label">Domains</span></div>
+          <div class="hero-stat"><span class="stat-number">3</span><span class="stat-label">Learning Types</span></div>
+          <div class="hero-stat"><span class="stat-number">12</span><span class="stat-label">References</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artifact Information -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="0">
+            <h4>Introduction</h4>
+            <p>This artifact was created for Workshop 1.5 in the AIML course at Indiana Wesleyan University. Algorithms are the base of machine learning, but a list of names does not help someone choose between them. This map puts 15 well known algorithms side by side so a reader can see what each one is for, how it learns, and how it relates to the others.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="50">
+            <h4>Description</h4>
+            <p>An infographic with four columns for the main application domains (Tabular Data, Computer Vision, Natural Language, Generative AI) and a band for tools that work across domains. Every card names the algorithm, shows whether it is supervised, unsupervised, or self-supervised, explains how it works in one sentence, and gives a real use case. Small tags show where else an algorithm is used and which algorithms build on each other. A text version of the same information is included below the picture.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
+            <h4>Objective</h4>
+            <p>To classify key machine learning algorithms by learning style and application domain, and to show their similarities and differences in a way that is clear to a reader who is not a specialist.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Process</h4>
+            <ol style="padding-left:1.25rem;line-height:1.9;color:var(--text-light);font-size:0.95rem;">
+  <li>Listed the algorithms named in the assignment and the two course videos, then added a few so every domain had at least three.</li>
+  <li>Asked what kind of data each algorithm works on, and placed it in a domain column.</li>
+  <li>Asked how each algorithm learns, and gave it a supervised, unsupervised, or self-supervised badge.</li>
+  <li>Wrote a one sentence explanation and a real use case for each, in plain words.</li>
+  <li>Added relationship tags and a decision strip ("Which one should I reach for?"), then reviewed every placement and moved the ones that did not fit cleanly.</li>
+</ol>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="350">
+            <h4>Tools</h4>
+            <ul style="padding-left:1.25rem;line-height:1.9;color:var(--text-light);font-size:0.95rem;">
+  <li><strong>HTML and CSS</strong> for the layout, so the text stays sharp and the design is easy to change.</li>
+  <li><strong>Headless Chromium (Playwright)</strong> to export the finished layout as a high resolution PNG and PDF.</li>
+  <li><strong>Course videos on AI, ML, DL, and GenAI</strong> as the starting point for the categories.</li>
+  <li><strong>An AI assistant (Claude)</strong> to help draft descriptions and check my wording. I reviewed and edited every entry.</li>
+</ul>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="400">
+            <h4>Value Proposition</h4>
+            <p>Shows that I can organize a large technical topic into a clear structure and explain it to a mixed audience. That skill is needed when recommending an AI approach to a business team.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="500">
+            <h4>Unique Value</h4>
+            <p>Most algorithm charts sort by one idea only. This one uses two at once, the data type and the learning style, and adds relationship tags and a quick decision guide. It also admits where the categories blur, for example BERT and GPT, which are neither fully supervised nor fully unsupervised.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="600">
+            <h4>Relevance</h4>
+            <p>Connects to my Salesforce work. Einstein Prediction Builder uses tabular methods, Einstein Vision uses deep learning for images, and Agentforce is built on large language models like GPT. It also connects to my Workshop 1.4 project, where a Decision Tree sorted fruit photos with about 54 percent accuracy. This map shows why a CNN would suit that data better.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Infographic -->
+    <section class="comparison-section">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">The Framework</div>
+        <h2>The Algorithm Map</h2>
+        <div class="glass-card map-figure reveal">
+          <div class="map-scroll">
+            <img src="ML_Algorithm_Map_infographic.png" width="3600" height="3158" alt="Infographic of 15 machine learning algorithms in four columns: Tabular Data (Linear Regression, Decision Tree, Random Forest, Gradient Boosting), Computer Vision (CNN, YOLO, Vision Transformer), Natural Language (Naive Bayes, BERT, GPT) and Generative AI (Diffusion Models, GAN, VAE), with K-means and PCA in a cross-domain band. Each card shows its learning type, how it works and an example use.">
+          </div>
+          <p class="map-caption">On a small screen, scroll the picture sideways. <a href="ML_Algorithm_Map_infographic.png">Open the full size image</a> or <a href="ML_Algorithm_Map_infographic.pdf">download the PDF</a>.</p>
+        </div>
+
+        <h3 style="margin-top:2.5rem;">All 15 algorithms at a glance</h3>
+        <div class="algo-table-wrap glass-card reveal">
+          <table class="algo-table">
+            <thead><tr><th>Algorithm</th><th>Learning type</th><th>Domain</th><th>How it works</th><th>Example use</th></tr></thead>
+            <tbody><tr><th scope="row">Linear Regression</th><td><span class="learn-badge learn-sup">Supervised</span></td><td>Tabular</td><td>Fits the best straight line to predict a number</td><td>House prices, sales forecasts</td></tr><tr><th scope="row">Decision Tree</th><td><span class="learn-badge learn-sup">Supervised</span></td><td>Tabular</td><td>Asks a chain of yes/no questions about the features</td><td>Loan approval, patient triage</td></tr><tr><th scope="row">Random Forest</th><td><span class="learn-badge learn-sup">Supervised</span></td><td>Tabular</td><td>Many trees on random samples that vote</td><td>Credit risk, customer churn</td></tr><tr><th scope="row">Gradient Boosting</th><td><span class="learn-badge learn-sup">Supervised</span></td><td>Tabular</td><td>Small trees added one by one, each fixing the last</td><td>Fraud detection, ad ranking</td></tr><tr><th scope="row">CNN</th><td><span class="learn-badge learn-sup">Supervised</span></td><td>Computer Vision</td><td>Filters find edges, then shapes, then objects</td><td>Medical imaging, face unlock</td></tr><tr><th scope="row">YOLO</th><td><span class="learn-badge learn-sup">Supervised</span></td><td>Computer Vision</td><td>Predicts boxes and labels in one pass over the image</td><td>Self-driving cars, shelf scanning</td></tr><tr><th scope="row">Vision Transformer</th><td><span class="learn-badge learn-sup">Supervised</span></td><td>Computer Vision</td><td>Splits an image into patches and relates them with attention</td><td>Image classification</td></tr><tr><th scope="row">Naive Bayes</th><td><span class="learn-badge learn-sup">Supervised</span></td><td>Natural Language</td><td>Word counts per class plus Bayes rule</td><td>Spam filters, sentiment</td></tr><tr><th scope="row">BERT</th><td><span class="learn-badge learn-self">Self-supervised</span></td><td>Natural Language</td><td>Learns by guessing hidden words, reading both directions</td><td>Search ranking, question answering</td></tr><tr><th scope="row">GPT</th><td><span class="learn-badge learn-self">Self-supervised</span></td><td>Natural Language, Generative AI</td><td>Predicts the next word again and again</td><td>Chatbots, code assistants</td></tr><tr><th scope="row">Diffusion Models</th><td><span class="learn-badge learn-uns">Unsupervised</span></td><td>Generative AI, Computer Vision</td><td>Learns to remove noise, then builds images from noise</td><td>Text-to-image art</td></tr><tr><th scope="row">GAN</th><td><span class="learn-badge learn-uns">Unsupervised</span></td><td>Generative AI, Computer Vision</td><td>A generator and a discriminator compete</td><td>Synthetic faces, extra training data</td></tr><tr><th scope="row">VAE</th><td><span class="learn-badge learn-uns">Unsupervised</span></td><td>Generative AI</td><td>Compresses data to a code and rebuilds it, then samples new codes</td><td>Molecule design, anomaly detection</td></tr><tr><th scope="row">K-means</th><td><span class="learn-badge learn-uns">Unsupervised</span></td><td>Tabular, Computer Vision</td><td>Moves k centres to the middle of their nearest points</td><td>Customer segments, image colors</td></tr><tr><th scope="row">PCA</th><td><span class="learn-badge learn-uns">Unsupervised</span></td><td>Tabular, Computer Vision</td><td>Keeps the directions with the most variation</td><td>Plotting wide data, noise removal</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Classification process -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Classification Process</div>
+        <h2>How I Sorted the Algorithms</h2>
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="0">
+            <h4>Question 1: What data does it work on?</h4>
+            <p>This sets the column. An algorithm goes where it is most often used, so Random Forest sits with tabular data and CNN sits with computer vision.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="100">
+            <h4>Question 2: How does it learn?</h4>
+            <p>Supervised algorithms learn from labeled examples. Unsupervised algorithms look for patterns without labels. Self-supervised algorithms create their own labels from the data, such as hiding a word and guessing it.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="200">
+            <h4>Question 3: How are they related?</h4>
+            <p>Some algorithms are built from others. Random Forest and Gradient Boosting grow out of the Decision Tree, YOLO builds on the CNN, and BERT, GPT, and the Vision Transformer all use the Transformer. A nested diagram at the top of the map shows how AI, machine learning, deep learning, and generative AI fit inside each other.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>K-means and PCA</h4>
+            <p>Both work on tables and on images, so a single column would mislead. I gave them a separate band with tags for both domains.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="400">
+            <h4>BERT and GPT</h4>
+            <p>The assignment asks for supervised or unsupervised. These models train on text with no human labels, so supervised is wrong, and unsupervised hides how they work. I added a self-supervised badge and noted that they are often fine tuned with labels later.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="500">
+            <h4>GPT and generative AI</h4>
+            <p>GPT is both a language model and a generative one. I placed it under Natural Language, where most people use it, and tagged it Generative AI. A different reader could reasonably choose the other column.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="600">
+            <h4>What I left out</h4>
+            <p>Support Vector Machines are named in the assignment, but I left them out to keep the map readable. They would go in the Tabular column in a later version.</p>
+          </div>
+
+        </div>
+
+        <!-- Conclusion -->
+        <div class="conclusion-card glass-card reveal">
+          <h3>Conclusion</h3>
+          <p>Algorithms are tools for different jobs, and the useful question is not which one is best but which one fits the data and the labels you have. Tables usually call for tree based methods, images for convolutional networks, text for transformers, and new content for generative models.</p>
+          <p>The map also shows that the categories overlap. Some algorithms work in several domains, and the line between supervised and unsupervised learning is less clear for modern language models. Being open about those edge cases made the framework more honest and more useful.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section class="artifact-content reveal">
+      <div class="container">
+        <div class="section-label" style="text-align:center;display:block;">Reflection</div>
+        <h2>Artifact Reflection</h2>
+
+        <div class="artifact-info-grid">
+
+          <div class="info-card glass-card reveal" data-delay="100">
+            <h4>Audience Customization</h4>
+            <p>This artifact is written for classmates, instructors, and hiring managers who know some machine learning terms but are not specialists. The explanations use plain words, each card has one example from everyday life or business, and the decision strip at the bottom turns the map into a quick guide for choosing an algorithm.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="200">
+            <h4>Lessons Learned</h4>
+            <p>I learned that two questions sort almost every algorithm: what kind of data it works on, and whether it needs labels. The hardest part was the algorithms that did not fit one box. Placing K-means, PCA, BERT, and GPT made me think carefully about what supervised and unsupervised learning really mean. Linking this map to my Workshop 1.4 Decision Tree project also showed me why the method I chose there had a limit on photo data.</p>
+          </div>
+
+          <div class="info-card glass-card reveal" data-delay="300">
+            <h4>Feedback Received</h4>
+            <p>This artifact has not had a peer review yet. I applied the feedback from my earlier artifacts from the start, which asked for clean punctuation, a consistent professional style, and references for every artifact.</p>
+          </div>
+
+          <div class="info-card glass-card full-width reveal" data-delay="400">
+            <h4>Revisions Applied</h4>
+            <p>While building the map I made several changes of my own. I moved K-means and PCA into a cross domain band, added the self-supervised badge, added relationship tags such as "builds on Decision Tree," fixed a legend that wrapped badly, and shortened the title so it fits on one line. After the peer review I will update this section with the feedback and the changes I make.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- References -->
+    <section class="artifact-content references-section reveal">
+      <div class="container">
+        <div class="info-card glass-card full-width references-card">
+          <h4>References</h4>
+          <ul>
+            <li>Breiman, L. (2001). Random forests. <em>Machine Learning</em>, 45(1), 5-32.</li>
+            <li>Chen, T., &amp; Guestrin, C. (2016). XGBoost: A scalable tree boosting system. <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 785-794.</li>
+            <li>Devlin, J., Chang, M., Lee, K., &amp; Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers for language understanding. <em>Proceedings of NAACL-HLT</em>.</li>
+            <li>Dosovitskiy, A., et al. (2021). An image is worth 16x16 words: Transformers for image recognition at scale. <em>International Conference on Learning Representations (ICLR)</em>.</li>
+            <li>Goodfellow, I., et al. (2014). Generative adversarial nets. <em>Advances in Neural Information Processing Systems</em>, 27.</li>
+            <li>Ho, J., Jain, A., &amp; Abbeel, P. (2020). Denoising diffusion probabilistic models. <em>Advances in Neural Information Processing Systems</em>, 33.</li>
+            <li>Kingma, D. P., &amp; Welling, M. (2014). Auto-encoding variational Bayes. <em>International Conference on Learning Representations (ICLR)</em>.</li>
+            <li>LeCun, Y., Bengio, Y., &amp; Hinton, G. (2015). Deep learning. <em>Nature</em>, 521(7553), 436-444.</li>
+            <li>MacQueen, J. (1967). Some methods for classification and analysis of multivariate observations. <em>Proceedings of the Fifth Berkeley Symposium on Mathematical Statistics and Probability</em>, 1, 281-297.</li>
+            <li>Redmon, J., Divvala, S., Girshick, R., &amp; Farhadi, A. (2016). You only look once: Unified, real-time object detection. <em>IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>.</li>
+            <li>Vaswani, A., et al. (2017). Attention is all you need. <em>Advances in Neural Information Processing Systems</em>, 30.</li>
+            <li>Course resources: <em>Unraveling the Differences Between AI, ML, DL, and GenAI</em> and <em>What are the differences between AI, ML, DL, and Gen AI?</em> [Videos].</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Deepthi Pinninti &bull; AI &amp; ML Portfolio &copy; 2026</p>
+      <p class="footer-sub"><a href="../../index.html">&#8592; Back to Portfolio</a> | Built with GitHub Pages | Indiana Wesleyan University</p>
+    </div>
+  </footer>
+  <script>
+    /* ===== Particle Generator ===== */
+    (function initParticles() {
+      var bg = document.querySelector('.particle-bg');
+      if (!bg) return;
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      var colors = [
+        'rgba(37, 99, 235, 0.25)',
+        'rgba(124, 58, 237, 0.2)',
+        'rgba(37, 99, 235, 0.15)',
+        'rgba(124, 58, 237, 0.12)',
+        'rgba(59, 130, 246, 0.18)'
+      ];
+
+      for (var i = 0; i < 30; i++) {
+        var particle = document.createElement('div');
+        particle.classList.add('particle');
+        var size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+        particle.style.animationDelay = (Math.random() * 10) + 's';
+        bg.appendChild(particle);
+      }
+    })();
+  </script>
+  <script src="../../js/main.js" defer></script>
+</body>
+</html>

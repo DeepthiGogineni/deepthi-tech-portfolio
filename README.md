@@ -22,6 +22,7 @@ deepthi-tech-portfolio/
 - **Professional Bio** - Introduction and professional journey
 - **Personal Value Proposition** - Unique value articulation
 - **Artifact 1: AI & ML Timeline** - Interactive timeline of key AI/ML milestones (1950-2026)
+- **Artifact 6: ML Algorithm Map** - Infographic classifying 15 algorithms by learning type and application domain
 
 ## Course
 
